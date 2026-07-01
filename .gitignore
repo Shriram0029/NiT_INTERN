@@ -1,0 +1,32 @@
+# Project Specific Data & Outputs
+data/
+models/
+logs/
+
+# Python Virtual Environments
+venv/
+env/
+.env
+.venv/
+
+# Python Cache & Compiled Files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+
+# IDE and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary Files
+*.tmp
+*.temp

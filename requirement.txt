@@ -1,0 +1,16 @@
+numpy
+matplotlib
+torch
+torchvision
+scikit-learn
+transformers
+tokenizers
+sentencepiece
+nlpaug
+sacremoses
+spacy
+networkx
+pandas
+tqdm
+pyyaml
+seaborn

@@ -1,0 +1,22 @@
+project_title: "Nature-Inspired Augmentation Selection for Cyber Banking Data Awareness using Genetic Optimization and Low-Resource NLP"
+experiment_name: "experiment_001"
+
+runtime:
+  mode: "simulation"
+  chunk_size: 10
+  total_samples: 300
+  faci_threshold: 0.5
+  random_seed: 42
+
+paths:
+  data_dir: "./data"
+  src_dir: "./src"
+  models_dir: "./models"
+  outputs_dir: "./outputs"
+  results_dir: "./results"
+  visualizations_dir: "./visualizations"
+  checkpoints_dir: "./checkpoints"
+
+logging:
+  level: "INFO"
+  log_to_file: True

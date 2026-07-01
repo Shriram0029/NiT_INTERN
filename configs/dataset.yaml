@@ -1,0 +1,9 @@
+dataset_name: "cfpb_cyber_banking_mock"
+num_classes: 5
+protected_entities:
+  - "OTP"
+  - "CARD"
+  - "MONEY"
+  - "ORG"
+  - "PERSON"
+  - "DATE"
