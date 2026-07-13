@@ -1,38 +1,48 @@
-# Nature-Inspired Augmentation Selection for Cyber Banking Data Awareness using Genetic Optimization and Low-Resource NLP
+# Nature-Inspired Augmentation Selection for Cyber Banking Data Awareness
 
-This repository contains the codebase for a research-grade streaming NLP framework that processes Consumer Financial Protection Bureau (CFPB) cyber-banking complaints. It applies a **Hybrid Genetic Algorithm (GA) & Grey Wolf Optimization (GWO)** approach to dynamically discover the optimal text augmentation policies at runtime, minimizing semantic drift while maximizing classification utility.
+This repository implements the Augmentation Selection Framework for Cyber Banking Data, powered by a Hybrid Genetic Algorithm and Grey Wolf Optimization (GA-GWO) pipeline.
 
-## Core Architecture
+## Environment Setup
 
-The system operates as a chunk-wise streaming pipeline (e.g., processing 5-10 complaints at a time). It extracts named entities (e.g., `OTP`, `CARD`), constructs a **Fraud Graph**, and calculates a **Fraud-Aware Complexity Index (FACI)**. 
+Ensure you have Python 3.9+ installed.
 
-To determine the best augmentation policy, the system employs a **Hybrid Nature-Inspired Optimization Framework**:
-1. **Genetic Algorithm (GA)**: Globally explores an 8-dimensional continuous policy space (BackTranslation ratio, BERT ratio, budget, mask probabilities, semantic thresholds, chunk priority, learning rate, and entity protection weight).
-2. **Grey Wolf Optimization (GWO)**: Locally refines the elite policies discovered by the GA using Alpha, Beta, and Delta wolves.
+1. Create a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-Historical policies are saved to a **Policy Memory**, ensuring continuous adaptive learning. Augmented samples are stored in a **Replay Buffer** to train a RoBERTa-based classifier incrementally without catastrophic forgetting.
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## File Structure
+## Configuration
 
-- **`main.py`**: The master orchestrator simulating a streaming environment and triggering the hybrid optimizer.
-- **`configs/`**: Contains YAML files for the environment (`config.yaml`), optimizer constraints (`optimizer.yaml`), and data labels (`dataset.yaml`).
-- **`src/`**: Modular implementations of all pipeline components (GA, GWO, FACI, Replay Buffer, Evaluator, Visualizer, etc.).
-- **`outputs/` & `results/`**: Output directories tracking comprehensive metrics, CSV optimizer logs, and inference checkpoints.
-- **`visualizations/`**: Auto-generated publication-ready plots for training loss, convergence tracking, confusion matrices, and FACI distributions.
+All system hyperparameters are stored in the `configs/` directory:
+- `config.yaml`: Global runtime variables (chunk sizes, threshold flags, paths).
+- `dataset.yaml`: Cyber-banking filter keywords, data column mappings, and preprocessing flags.
+- `optimizer.yaml`: Boundary configurations for the Hybrid Optimizer (Budget, Mask Probability, Strategy Bounds).
 
-## Environment & Requirements
+## How to Run the Master Pipeline
 
-Install dependencies from `requirement.txt`:
-```bash
-pip install -r requirement.txt
-```
-
-## How to Run
-
-Execute the main simulation pipeline via:
+To run the complete framework and simulate all baselines, simply execute the main script:
 ```bash
 python main.py
 ```
 
-Check the `visualizations/` and `results/` directories after execution to see the output plots and tracking CSVs!
-# NiT
+### What happens when you run `main.py`?
+1. **Dataset Pipeline:** It reads `data/complaints_150.json`, applies cyber-banking filters, builds knowledge graphs, and tracks class imbalances.
+2. **Baselines Execution:** It iterates through all 8 baseline models defined in `configs/config.yaml` (`no_aug`, `random`, `fixed_bt`, `fixed_bert`, `rule_based`, `ga_only`, `gwo_only`, `hybrid`).
+3. **Adaptive Augmentation:** For each chunk of data, it calculates multi-dimensional FACI scores and predicts the optimal budget, strategy, and expected utility.
+4. **Validation:** It executes the augmentations and validates them through the `SemanticValidator`.
+5. **Incremental Training:** Uses a Reservoir-sampled balanced `ReplayBuffer` to incrementally train a RoBERTa-based classification model.
+6. **Analytics & Plotting:** Saves explanations to `results/<baseline>/explanations.csv`, validation rejects to `validation_report.csv`, and produces automated publication-quality plots in the `visualizations/` directory.
+7. **Statistical Analysis:** Concludes by running rigorous statistical testing across the baselines.
+
+## Output Navigation
+After a run completes, you will find:
+- **`data/filtered_dataset.json`**: The cleaned audit version of the raw dataset.
+- **`results/<baseline>/`**: Stores the semantic validation reports, `policy_memory.csv`, and explainability logs.
+- **`visualizations/<baseline>/`**: Houses `.png` radar charts, convergence plots, strategy distributions, confusion matrices, and metrics graphics.
+- **`results/statistical_analysis.json`**: The final output containing 95% Confidence Intervals, Wilcoxon p-values, and Cohen's D effect sizes across experiments.

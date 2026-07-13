@@ -44,3 +44,254 @@ Chunk,FACI,Fitness,BT,BERT,Budget,Mask,Sem,Ent,Pri,LR
 27,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.7086199999999998,1.0,1.0,1.0,0.3,0.95,1.0,0.8682547121794861,1.9751536715786358e-05
 28,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.7086199999999998,1.0,1.0,1.0,0.3,0.95,1.0,1.0,3.4566121685046866e-05
 29,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.7086199999999998,1.0,1.0,1.0,0.28430154562293114,0.95,1.0,0.829480215437193,2.5685564808897178e-05
+0,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.6571901423864714,1.0,0.975048213074175,1.0,0.20654538704516331,0.95,0.79012929457486,0.722946962817422,4.4969395869762246e-05
+1,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.6973648009130256,0.8543629777532384,1.0,1.0,0.3,0.9412231314218641,1.0,0.7444142630476747,5e-05
+2,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.7496244230963671,1.0,1.0,1.0,0.11480928546431098,0.95,1.0,0.877742843541586,3.625577025026928e-05
+3,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.7777170710801262,0.9820830212664621,1.0,1.0,0.21934442008592456,0.95,1.0,0.9655605615814434,5e-05
+4,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.7779239431128024,0.9820830212664621,1.0,1.0,0.21934442008592456,0.95,1.0,0.9655605615814434,5e-05
+5,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.7779239431128024,0.9820830212664621,1.0,1.0,0.21934442008592456,0.95,1.0,0.9655605615814434,5e-05
+6,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.789532548129109,1.0,1.0,1.0,0.21728682303863775,0.9492340111256787,1.0,1.0,5e-05
+7,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.789532548129109,1.0,1.0,1.0,0.21728682303863775,0.9492340111256787,1.0,1.0,5e-05
+8,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.8036486364909898,1.0,1.0,1.0,0.2493215912274743,0.95,1.0,1.0,4.9275436300185316e-05
+9,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.8036486364909898,1.0,1.0,1.0,0.2493215912274743,0.95,1.0,1.0,4.9275436300185316e-05
+10,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.8036486364909898,1.0,1.0,1.0,0.2493215912274743,0.95,1.0,1.0,4.9275436300185316e-05
+11,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+12,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+13,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+14,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+15,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+16,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+17,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+18,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+19,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+20,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+21,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+22,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+23,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+24,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+25,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+26,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+27,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+28,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+29,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4977076848941766,3.780174995762707e-05
+0,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.5027050208478494,0.657922942393441,0.9519826526080575,1.0,0.2242777553780063,0.95,1.0,0.2611480364493426,2.850874954547329e-05
+1,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.7708944134627478,1.0,1.0,1.0,0.22414412537369155,0.95,1.0,0.19284039837546038,3.151910080204624e-05
+2,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.7935776501494767,1.0,1.0,1.0,0.22414412537369155,0.95,1.0,0.19284039837546038,3.151910080204624e-05
+3,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.8166507934532492,1.0,1.0,1.0,0.2818269836331225,0.95,1.0,0.07946127155330994,2.9948633790213364e-05
+4,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.8166507934532492,1.0,1.0,1.0,0.2818269836331225,0.95,1.0,0.07946127155330994,2.9948633790213364e-05
+5,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+6,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+7,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+8,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+9,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+10,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+11,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+12,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+13,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+14,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+15,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+16,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+17,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+18,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+19,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+20,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+21,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+22,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+23,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+24,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+25,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+26,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+27,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+28,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+29,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.05072711956790518,2.7204501358404342e-05
+0,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.6071720316201101,0.9385708447739658,1.0,1.0,0.14778831790198813,0.95,0.7824474630938377,0.7696422120239333,1.7928948282057355e-05
+1,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.6594532601882532,1.0,0.9196402943160938,1.0,0.11964120532047857,0.95,0.9798853101700132,0.8261936346247185,2.398380250739023e-05
+2,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.7761669754580074,1.0,1.0,1.0,0.2894530745314476,0.95,0.9129314912908567,0.9768168409625627,1.428065567032789e-05
+3,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.7947264653289807,1.0,1.0,1.0,0.22756895909435734,0.95,1.0,0.5544241326395244,1.626730431235359e-05
+4,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.796007976248874,1.0,1.0,1.0,0.23602495565612636,0.95,1.0,0.8924252238019692,1.9668569167779617e-05
+5,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.7983299822624506,1.0,1.0,1.0,0.23602495565612636,0.95,1.0,0.8924252238019692,1.9668569167779617e-05
+6,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+7,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+8,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+9,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+10,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+11,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+12,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+13,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+14,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+15,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+16,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+17,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+18,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+19,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+20,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+21,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+22,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+23,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+24,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+25,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+26,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+27,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+28,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+29,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,0.4873431103622849,1.700905624537373e-05
+0,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.6983874315592802,1.0,1.0,1.0,0.16781051368673428,0.9200656904995936,1.0,0.9203094266274361,1.7593658308599628e-05
+1,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.7552211205814585,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+2,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+3,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+4,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+5,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+6,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+7,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+8,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+9,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+10,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+11,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+12,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+13,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.792599377553094,1.0,1.0,1.0,0.22169844388273455,0.95,1.0,1.0,2.2689255070189948e-05
+14,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.8031598386389498,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+15,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+16,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+17,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+18,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+19,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+20,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+21,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+22,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+23,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+24,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+25,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+26,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+27,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+28,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+29,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,1.82392,1.0,1.0,1.0,0.3,0.95,1.0,1.0,2.882870783078013e-05
+0,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+1,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+2,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+3,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+4,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+5,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+6,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+7,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+8,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+9,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+10,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+11,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+12,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+13,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+14,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+15,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+16,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+17,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+18,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+19,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+20,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+21,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+22,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+23,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+24,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+25,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+26,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+27,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+28,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+29,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+0,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+1,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+2,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+3,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+4,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+5,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+6,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+7,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+8,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+9,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+10,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+11,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+12,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+13,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+14,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+15,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+16,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+17,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+18,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+19,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+20,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+21,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+22,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+23,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+24,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+25,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+26,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+27,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+28,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+29,My card was stolen and used for a scam of 500 dollars. I never gave them my OTP.,0.22524920634920628,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+0,"I have filed a dispute in regards to the incorrect information that's on my credit report. Which relates to late payments. It has been well over 30 days, and I haven't received any investigation results. Listed below are the dates and amounts. 
+
+Credit Bureau : XXXX  XXXX XXXX XX/XX/2019 XX/XX/2019 XXXX XXXX Monthly Payments XXXX XXXX XXXX XXXX  XX/XX/2019 XX/XX/2019 XX/XX/2019 XXXX XXXX  Monthly Payments XXXX XXXX XXXX XXXX   XX/XX/2019 XX/XX/2019 XXXX XXXX Monthly Payments XXXX/XXXX  XX/XX/201XXXX XXXX XXXX  Monthly Payments",0.08137790664058893,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+0,"I was incarcerated for almost 10 years. I was released XXXX. All my information was stolen and accounts have been opened and debts accumulated beyond belief! This is a very frustrating process. This complaint is for XXXX  and XXXX XXXX signs. They have listed multiple accounts as well as bad checks. US Bank, XXXX XXXX, XXXX XXXX XXXX, XXXX XXXX and a bad check to XXXX.",0.061048936516108473,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+1,"On XX/XX/XXXX I was called by a creditor Nelson Cruz and Associate they claimed I owed XXXX XXXX XXXX XXXX {$12000.00} from XXXX thru XXXX ... I never had a credit card with XXXX or applied for credit with them ... On XX/XX/XXXX I called XXXX XXXX XXXX XXXX and spoke in someone in customer service along Security and Fraud Dept. I gave them my personal info SS #, DOB, address and they did not have me in there records.. 
+I called XXXX, XXXX  and XXXX I ordered my credit report and XXXX XXXX XXXXXXXX XXXX XXXX not on my credit report ... 
+Nelson Cruz and Associate will not give me the bill from XXXX XXXX instead they want to settle for {$4000.00} over the phone, They continue to harass me with threats, arrest, lawsuit, vehicle repossession, wage garnishments ect.. 
+Here are the name and phone.. 
+
+Nelson Cruz and Associate XXXX XXXX XXXX. XXXX, Tx XXXX phone XXXX or XXXX 
+XXXX XXXX XXXX",0.060331225380100786,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+2,"I wrote three requests, the unverified accounts listed below still remain on my credit report in violation of Federal Law. Equifax is under FCRA law to obtain the of the original creditors documentation on file to verify that this information is mine and is correct. I have already filed a FTC Report and Police Report. Who verified these accounts? You have NOT provided me a copy of ANY original documentation ( a consumer contract with my signature on it ) as required under Section 609 ( a ) ( 1 ) ( A ) & Section 611 ( a ) ( 1 ) ( A ). Furthermore you have failed to provide the method of verification as required under Section 611 ( a ) ( 7 ). Please be advised that under Section 611 ( 5 ) ( A ) of the FCRA you are required to promptly DELETE all information which can not be verified. 
+The law is very clear as to the Civil liability and the remedy available to me ( Section 616 & 617 ) if you fail to comply with Federal Law. I am a litigious consumer and fully intend on pursuing litigation in this matter to enforce my rights under the FCRA. Please remove the following accounts : XXXX XXXX XXXX XXXX XXXX, XXXX XXXX XXXX   XXXX",0.05314497330034465,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+3,"I submitted a dispute for a company named XXXX XXXX XXXX, this company says I have a balance. This company was under my bankruptcy and it has since been discharged.",0.05870788113692291,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+4,"I have contacted this bureau multiple times requesting an investigation to verify the debt and ask who opened and signed for these accounts. I also ask them to remove these fraudulent accounts reporting in my consumer file that do not belong to me. They have not mailed me any results and have yet to contact me regarding this matter. They are not cooperating with me at all. The accounts listed below were opened in result of identity theft. It is hindering me from obtaining credit and I need this removed asap. The accounts are listed here below. XXXX   XXXX XXXX : XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX ( XXXX, XXXX ) XXXX/XXXX : XXXX XXXX/XXXX : XXXX XXXX XXXX/XXXX : XXXX XXXX/XXXX XXXX XXXX XXXX XXXX XXXX : XXXX XXXX XXXX/XXXX XXXX : XXXX XXXX : XXXX Dept of ED : XXXX ( XXXX ), ( XXXX ), ( XXXX ), ( XXXX ), ( XXXX ) Bankruptcy XXXX XXXX XXXX : XXXX XXXX  : XXXX XXXX/XXXX XXXX Dept of Ed : XXXX XXXX   XXXX/XXXX XXXX : XXXX, XXXX XXXX XXXX : XXXX, XXXX XXXX XXXX XXXX : XXXX XXXX XXXX : XXXX.",0.07149510044588599,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+3,"I notified Experian of an inaccuracy on my report by national credit adjust. This same account was reported to Experian by another company, XXXX XXXX XXXX XXXX which was deleted on XX/XX/2019 because it was proven invalid. Experian created what they called an investigation which lead to the incorrect/fraud info to remain on my report after they deleted this same info by another collection agency previously. This information is completely false and should not remain on my credit. Please help!",0.0636121191213046,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+5,Around XX/XX/2020 i XXXX XXXX XXXX opened a credit card account online with capital one bank and capital one approved me for a secured credit card and which i was excited to start my credit over again so at that time i sent capital one my security deposit for XXXX online then i got a letter from capital one bank on the XX/XX/2020 telling me that they need to talk to me about possibly fruad so i contacted them about their concerns and i also corporated with capital one bank giving them all the identifying information needed to get the restriction lifted twice first time they ask me for identification card pge bill and social card and i sent those to them and they confirm they received those items but them they stated to me that could not clear my id cause it was to knew and to call them back in a week i did that patiently waiting on capital one in the mist of all this iam dealing with XXXX and needing to use the card so i can get my medicine because i dont have enough cause i put the money into this account i am so XXXX  and iam asking that they please lift this and pay for my medicine that is XXXX because i should never been put threw this XXXX,0.06354814865729999,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+6,"I was recently going to check out a new car at XXXX. After carefully consideration I decided to apply for a loan for this car. Moments later I was decline for a lower interest rate and approved for an extremely high interest rate. Which promoted me to check my credit report. After doing so I notice a couple of items on my report that are not mine. These items need to be deleted from my credit report. 
+
+XXXX XXXX XXXX {$140.00} XXXX  XXXX {$450.00} XXXX XXXX XXXX {$7800.00} XXXX   XXXX  XXXX {$370.00} XXXX XXXX {$10000.00}",0.05684451216857009,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+4,"I trust this letter finds you well. I am writing to bring to your attention a matter of extreme concern and frustration regarding the persistent issues I have faced in correcting a late open account and the associated late closed and charge-off status on my financial records.
+
+Despite my repeated attempts to address and rectify these issues over the past several months, the challenges persist, negatively impacting my creditworthiness and causing significant stress. I am seeking your immediate attention and resolution to this matter.
+
+Here is a summary of the steps I have taken to address these issues : Despite my continued efforts, the late open account has not been corrected, and the associated late closed and charge-off status remains on my records.
+
+I understand that resolving such matters may take time, but the prolonged nature of this issue has led me to escalate the situation formally. I kindly request a thorough and expedited investigation into the root causes of these problems and the implementation of corrective measures to rectify the late open account and remove the late closed and charge-off status promptly. 
+
+If there are specific documents or information required from my end to facilitate the resolution process, please communicate those requirements at your earliest convenience. I believe in fair and accurate reporting practices, and I trust that Credit Bureaus will take immediate and necessary steps to address and rectify these issues. I am asking for your assistance to correct these late open account and remove tha late closed and charge off in my credit file : XXXX. XXXX XXXX XXXX Balance : {$1200.00} - My record shows that this account was paid as Agreed and I never missed a payment. Please update it immediately. 
+
+XXXX. XXXX XXXX XXXX  XXXX Balance : {$36000.00} - The number of late payments is incorrect. I never missed a payment. Please adjust immediately. 
+
+XXXX. XXXX XXXX XXXX XXXX Balance : {$0.00} - XXXX requested an investigation and the removal of the charge-off status. No changes were made. No investigation was conducted at all. You had optimal time to review this matter and make the appropriate corrections, you elected not to. Please remove this item immediately. 
+XXXX. XXXX XXXX XXXX XXXX : {$16000.00} - The limit to this account was a fraction of the amount due it was stating. That is utterly unfathomable! Had a proper investigation been conducted you would have seen the error and corrected it immediately. You failed to do your job ; you must now REMOVE THIS ITEM ALTOGETHER. 
+XXXX. XXXX XXXX XXXX : {$7900.00} - This was an illegal repossession followed by illegally reporting on my credit report ; this should have been investigated and corrected immediately. You failed to do so, REMOVE IMMEDIATELY.",0.05784535156502402,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+7,"I Mr.XXXX XXXX is a victim of identity theft and accounts have been opened in my name as a result of identity theft ... 
+XXXX  XXXX account # XXXXxxxxxxxxxxx opened XX/XX/XXXX amount {$23000.00}. 
+Next account XXXX  XXXX original creditor XXXX XX/XX/XXXX amount {$750.00} And there is Inquiries : XXXX XXXX XXXX XXXX, XXXX XXXX XXXX XX/XX/XXXX XXXX XXXX/XXXX XX/XX/XXXX",0.047976733296378374,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+5,"XXXX claimed they delivered a package to my address, which I never received Listed below are the delivery facts from the USPS regarding shipments XXXX & XXXX, with the supporting documentation enclosed. 
+
+I. There was no signature II. The packages were delivered to zip code XXXX. 
+a. There are XXXX souls living in XXXX dwelling units in ZIP code XXXX. 
+
+XXXX provided no information that the package was delivered to my address, let alone signed by anyone. The only information provided shows that the packages were left at or near the mailbox in one of XXXX dwelling units. At or near mailbox does not indicate that the package was even placed inside of a secured area, let alone a secured area in my building. 
+
+How am I being held responsible for a package for which there is no proof that I received? XXXX for a small fee, {$.00}, could have requested delivery confirmation from the USPS. This would have ensured that an authorized agent signed for the package. Alternately, XXXX could have ensured the packages for approximately {$4.00} each. 
+
+There is no evidence to support that I received the packages.",0.06131076999419278,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+8,"There was an account opened under my name some time in 2017, the original creditor was XXXX XXXX XXXX, it has now turned into a collection agency with a company named I.Q Data Internatio XXXX XXXX   XXXX, XXXX, WA XXXX. I have tried disputing this information with XXXX, i have filed an identity theft report, filed multiple disputes on this collection account. And they still won't remove it from my credit report. I even tried calling the collection agency my self, and they were nasty rude people, they did not care about anything else but their money, even when i told them that it wasnt my account.",0.04442993141564849,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+9,"I wrote three requests, the unverified accounts listed below still remain on my credit report in violation of Federal Law. Equifax is under FCRA law to obtain the of the original creditors documentation on file to verify that this information is mine and is correct. I have already filed a FTC Report and Police Report. Who verified these accounts? You have NOT provided me a copy of ANY original documentation ( a consumer contract with my signature on it ) as required under Section 609 ( a ) ( 1 ) ( A ) & Section 611 ( a ) ( 1 ) ( A ). Furthermore you have failed to provide the method of verification as required under Section 611 ( a ) ( 7 ). Please be advised that under Section 611 ( 5 ) ( A ) of the FCRA you are required to promptly DELETE all information which can not be verified. 
+The law is very clear as to the Civil liability and the remedy available to me ( Section 616 & 617 ) if you fail to comply with Federal Law. I am a litigious consumer and fully intend on pursuing litigation in this matter to enforce my rights under the FCRA. Please remove the following accounts : XXXX XXXX XXXX XXXX XXXX, XXXX XXXX XXXX   XXXX",0.07042976677759655,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+6,"I am writing to address a matter that has been pending since my initial contact via mail and subsequent complaints filed with the CFPB. Regrettably, despite the passage of several months, I have yet to receive the anticipated resolution from your department regarding the misleading and inaccurate entry on my credit report.",0.06003118491176702,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+7,"I Mr.XXXX XXXX is a victim of identity theft and accounts have been opened in my name as a result of identity theft ... 
+XXXX  XXXX account # XXXXxxxxxxxxxxx opened XX/XX/XXXX amount {$23000.00}. 
+Next account XXXX  XXXX original creditor XXXX XX/XX/XXXX amount {$750.00} And there is Inquiries : XXXX XXXX XXXX XXXX, XXXX XXXX XXXX XX/XX/XXXX XXXX XXXX/XXXX XX/XX/XXXX",0.05354634198150522,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+8,"I trust this letter finds you well. I am writing to bring to your attention a matter of extreme concern and frustration regarding the persistent issues I have faced in correcting a late open account and the associated late closed and charge-off status on my financial records.
+
+Despite my repeated attempts to address and rectify these issues over the past several months, the challenges persist, negatively impacting my creditworthiness and causing significant stress. I am seeking your immediate attention and resolution to this matter.
+
+Here is a summary of the steps I have taken to address these issues : Despite my continued efforts, the late open account has not been corrected, and the associated late closed and charge-off status remains on my records.
+
+I understand that resolving such matters may take time, but the prolonged nature of this issue has led me to escalate the situation formally. I kindly request a thorough and expedited investigation into the root causes of these problems and the implementation of corrective measures to rectify the late open account and remove the late closed and charge-off status promptly. 
+
+If there are specific documents or information required from my end to facilitate the resolution process, please communicate those requirements at your earliest convenience. I believe in fair and accurate reporting practices, and I trust that Credit Bureaus will take immediate and necessary steps to address and rectify these issues. I am asking for your assistance to correct these late open account and remove tha late closed and charge off in my credit file : XXXX. XXXX XXXX XXXX Balance : {$1200.00} - My record shows that this account was paid as Agreed and I never missed a payment. Please update it immediately. 
+
+XXXX. XXXX XXXX XXXX  XXXX Balance : {$36000.00} - The number of late payments is incorrect. I never missed a payment. Please adjust immediately. 
+
+XXXX. XXXX XXXX XXXX XXXX Balance : {$0.00} - XXXX requested an investigation and the removal of the charge-off status. No changes were made. No investigation was conducted at all. You had optimal time to review this matter and make the appropriate corrections, you elected not to. Please remove this item immediately. 
+XXXX. XXXX XXXX XXXX XXXX : {$16000.00} - The limit to this account was a fraction of the amount due it was stating. That is utterly unfathomable! Had a proper investigation been conducted you would have seen the error and corrected it immediately. You failed to do your job ; you must now REMOVE THIS ITEM ALTOGETHER. 
+XXXX. XXXX XXXX XXXX : {$7900.00} - This was an illegal repossession followed by illegally reporting on my credit report ; this should have been investigated and corrected immediately. You failed to do so, REMOVE IMMEDIATELY.",0.07757182242722568,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05
+9,I have already had to file a complaint against diversified adjustment service with the BBB because they were threatening my credit report and refused to allow me to dispute a debt they keep calling me over. I advised them I am disputing the debt and they will not allow me to do so. Now they constantly call my phone to harass me. I have told them 4xs now to stop calling my phone and they will not. This is harassment and I want it to stop. I just called XXXX XXXX today and advised XXXX the third party they sent information to is harassing me and I want it to stop as I have been making monthly payments to XXXX XXXX for a past due balance. XXXX XXXX  gets $ XXXX as we originally agreed to before they placed my account in collections and I am now being harassed and it is against the FDCPA to continue to call and harass a consumer after they are told to stop and after I advised them I am disputing the debt. They are to not call me for 30 days while they investigate the dispute in which they have failed to do. I want a validation and verification of debt from Diversified Adjustment and I want them to stop harassing me. I have already asked 4xs to stop.,0.051117629021475854,0.0,0.0,0.0,0.0,0.0,0.9,0.9,0.0,2e-05

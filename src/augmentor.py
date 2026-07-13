@@ -2,7 +2,6 @@ import random
 import logging
 import torch
 from transformers import pipeline
-import nlpaug.augmenter.word as naw
 from src.semantic_validator import SemanticValidator
 
 logger = logging.getLogger(__name__)
@@ -13,24 +12,11 @@ class Augmentor:
         self.device_id = 0 if self.device == 'cuda' else -1
         
         try:
-            self.back_translation_aug = naw.BackTranslationAug(
-                from_model_name='facebook/wmt19-en-de',
-                to_model_name='facebook/wmt19-de-en',
-                device=self.device
-            )
-            
-            models = [
-                self.back_translation_aug.model.src_model, 
-                self.back_translation_aug.model.tgt_model
-            ]
-            
-            for model in models:
-                model.config.do_sample = True
-                model.config.top_k = 50
-                model.config.top_p = 0.95
-                model.config.temperature = 0.8
+            self.en_de = pipeline("translation", model="Helsinki-NLP/opus-mt-en-de", device=self.device_id)
+            self.de_en = pipeline("translation", model="Helsinki-NLP/opus-mt-de-en", device=self.device_id)
+            self.back_translation_aug = True
         except Exception as e:
-            logger.warning(f"Could not load nlpaug translation models: {e}")
+            logger.warning(f"Could not load HuggingFace translation models: {e}")
             self.back_translation_aug = None
             
         try:
@@ -43,10 +29,9 @@ class Augmentor:
         if not self.back_translation_aug:
             return text
         try:
-            augmented_text = self.back_translation_aug.augment(text)
-            if isinstance(augmented_text, list):
-                return augmented_text[0]
-            return augmented_text
+            de = self.en_de(text)[0]['translation_text']
+            en = self.de_en(de)[0]['translation_text']
+            return en
         except Exception:
             return text
 
@@ -85,6 +70,16 @@ class Augmentor:
         except Exception:
             return text
 
+    def get_strategy(self, p_bt, p_bert, budget):
+        if budget < 1 or (p_bt < 0.2 and p_bert < 0.2):
+            return "No Augmentation"
+        elif p_bt > p_bert + 0.3:
+            return "Back Translation"
+        elif p_bert > p_bt + 0.3:
+            return "BERT Contextual"
+        else:
+            return "Back Translation + BERT"
+
     def generate(self, text, entities, policy):
         # [BT_Ratio, BERT_Ratio, Budget, MaskProbability, SemanticThreshold, EntityProtectionWeight, ChunkPriority, LR]
         p_bt, p_bert, budget, mask_prob, sem_thresh, ent_weight, _, _ = policy
@@ -92,14 +87,25 @@ class Augmentor:
         
         validator = SemanticValidator(semantic_threshold=sem_thresh, entity_weight=ent_weight)
         
+        strategy = self.get_strategy(p_bt, p_bert, budget)
         results = set()
+        
+        if strategy == "No Augmentation":
+            return []
+            
         for _ in range(budget):
-            if random.random() < p_bt:
+            if strategy == "Back Translation":
                 aug = self.back_translate(text)
-            else:
+            elif strategy == "BERT Contextual":
                 aug = self.bert_masking(text, mask_prob)
-                
-            if validator.validate(text, aug, entities):
+            else:
+                if random.random() < 0.5:
+                    aug = self.back_translate(text)
+                else:
+                    aug = self.bert_masking(text, mask_prob)
+                    
+            if validator.validate(text, aug, entities, existing_samples=list(results)):
                 if aug != text:
                     results.add(aug)
+                    
         return list(results)

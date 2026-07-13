@@ -3,8 +3,9 @@ experiment_name: "experiment_001"
 
 runtime:
   mode: "simulation"
-  chunk_size: 10
-  total_samples: 300
+  baseline_modes: ["no_aug", "random", "fixed_bt", "fixed_bert", "rule_based", "ga_only", "gwo_only", "hybrid"]
+  chunk_size: 32
+  total_samples: 320
   faci_threshold: 0.5
   random_seed: 42
 
@@ -20,3 +21,4 @@ paths:
 logging:
   level: "INFO"
   log_to_file: True
+

@@ -21,13 +21,15 @@ class GeneticAlgorithm:
         self.fitness_history = []
         self.diversity_history = []
         self.mutation_history = []
+        self.selection_pressure_history = []
         
     def _initialize_population(self):
         pop = []
         if self.memory:
-            elites = self.memory.get_elite_population()
-            for p in elites:
-                pop.append(np.array(p))
+            elites = self.memory.get_elites_by_faci_similarity(self.faci)
+            if elites:
+                for p in elites:
+                    pop.append(np.array(p))
                 
         while len(pop) < self.pop_size:
             ind = [random.uniform(b[0], b[1]) for b in self.bounds]
@@ -41,14 +43,34 @@ class GeneticAlgorithm:
         
     def fitness_function(self, chromosome):
         bt, bert, budget, mask, sem, ent, pri, lr = chromosome
-        cost = (bt * 0.1 + bert * 0.05) * budget
-        diversity = bt * bert
-        f1_estimate = (bt * 0.4 + bert * 0.3) * (budget / 5.0) * sem * ent
         
-        if self.faci:
-            f1_estimate *= (1.0 + self.faci.get('complexity', 0))
-            
-        return f1_estimate + diversity * 0.1 - cost * 0.1
+        # Estimate expected metrics based on strategy
+        macro_f1 = min((bt * 0.4 + bert * 0.4) * (budget / 5.0) + 0.5, 0.95)
+        semantic_similarity = sem
+        entity_preservation = ent
+        diversity_metric = (bt * bert) + (mask * 0.5)
+        
+        comp_cost = (bt * 0.4 + bert * 0.2) * (budget / 5.0)
+        
+        cif = self.faci.get('class_imbalance_factor', 1.0) if self.faci else 1.0
+        minority_gain = (budget / 5.0) * (1.0 - 1.0/cif) if cif > 1.0 else 0.0
+        augmentation_fairness = 1.0 - abs(bt - bert) * 0.5
+        
+        # Exact Formula:
+        # 0.35 MacroF1 + 0.20 Minority Gain + 0.15 Entity Preservation + 
+        # 0.10 Semantic Similarity + 0.10 Diversity + 0.10 Augmentation Fairness - 
+        # 0.10 Computational Cost
+        
+        fitness = (
+            0.35 * macro_f1 + 
+            0.20 * minority_gain + 
+            0.15 * entity_preservation + 
+            0.10 * semantic_similarity + 
+            0.10 * diversity_metric + 
+            0.10 * augmentation_fairness - 
+            0.10 * comp_cost
+        )
+        return fitness
         
     def _tournament_selection(self, fitnesses, k=3):
         selected = random.sample(range(self.pop_size), k)
@@ -71,18 +93,31 @@ class GeneticAlgorithm:
         return ind
         
     def optimize(self):
+        cif = self.faci.get('class_imbalance_factor', 1.0) if self.faci else 1.0
+        
         for gen in range(self.generations):
             fitnesses = [self.fitness_function(ind) for ind in self.population]
             self.fitness_history.append(max(fitnesses))
+            
+            avg_fit = np.mean(fitnesses)
+            max_fit = np.max(fitnesses)
+            selection_pressure = max_fit / (avg_fit + 1e-9)
+            self.selection_pressure_history.append(selection_pressure)
             
             diversity = self._calculate_diversity()
             self.diversity_history.append(diversity)
             
             target_diversity = 0.2
+            
+            # Dynamic Mutation Rate based on diversity and class imbalance
+            base_mut = self.base_mutation_rate
+            if cif > 2.0:
+                base_mut *= 1.5 # more exploration for high imbalance
+                
             if diversity < target_diversity:
-                current_mut_rate = min(self.base_mutation_rate * 2.0, 0.5)
+                current_mut_rate = min(base_mut * 2.0, 0.5)
             else:
-                current_mut_rate = self.base_mutation_rate
+                current_mut_rate = base_mut
                 
             self.mutation_history.append(current_mut_rate)
             
@@ -102,4 +137,13 @@ class GeneticAlgorithm:
         final_fitness = [self.fitness_function(ind) for ind in self.population]
         best_indices = np.argsort(final_fitness)[::-1]
         elite_policies = self.population[best_indices]
-        return elite_policies, self.fitness_history, self.diversity_history, self.mutation_history
+        
+        metrics = {
+            "fitness_history": self.fitness_history,
+            "diversity_history": self.diversity_history,
+            "mutation_history": self.mutation_history,
+            "selection_pressure": self.selection_pressure_history
+        }
+        
+        return elite_policies, metrics
+

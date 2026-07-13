@@ -10,7 +10,13 @@ class GWOOptimizer:
         self.bounds = bounds
         self.num_dim = len(bounds)
         self.memory = memory
+        
         self.fitness_history = []
+        self.alpha_fitness_history = []
+        self.beta_fitness_history = []
+        self.delta_fitness_history = []
+        self.wolf_distance_history = []
+        self.search_radius_history = []
         
     def _clip(self, pos):
         for i in range(self.num_dim):
@@ -59,8 +65,17 @@ class GWOOptimizer:
                     delta_score, delta_pos = score, positions[i].copy()
                     
             self.fitness_history.append(alpha_score)
+            self.alpha_fitness_history.append(alpha_score)
+            self.beta_fitness_history.append(beta_score)
+            self.delta_fitness_history.append(delta_score)
+            
+            # Calculate mean wolf distance
+            mean_pos = np.mean(positions, axis=0)
+            distances = [np.linalg.norm(pos - mean_pos) for pos in positions]
+            self.wolf_distance_history.append(np.mean(distances))
             
             a = self.a_start - t * ((self.a_start - self.a_end) / self.max_iter)
+            self.search_radius_history.append(a)
             
             for i in range(self.num_wolves):
                 for j in range(self.num_dim):
@@ -81,4 +96,14 @@ class GWOOptimizer:
                     
                     positions[i][j] = (X1 + X2 + X3) / 3.0
                     
-        return alpha_pos, beta_pos, delta_pos, alpha_score
+        metrics = {
+            "fitness_history": self.fitness_history,
+            "alpha_fitness": self.alpha_fitness_history,
+            "beta_fitness": self.beta_fitness_history,
+            "delta_fitness": self.delta_fitness_history,
+            "wolf_distance": self.wolf_distance_history,
+            "search_radius": self.search_radius_history
+        }
+                    
+        return alpha_pos, beta_pos, delta_pos, alpha_score, metrics
+
