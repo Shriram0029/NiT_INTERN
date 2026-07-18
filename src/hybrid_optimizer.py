@@ -37,15 +37,21 @@ class HybridOptimizer:
         logger.info(f"GWO Optimization complete. Best Alpha Fitness: {alpha_score:.4f}")
         
         # Phase 3: True Augmentation Selection (Prediction)
-        bt, bert, budget, mask, sem, ent, pri, lr = alpha
+        bt, bert, budget_raw, mask, sem, ent, pri, lr = alpha
         
+        budget = int(round(budget_raw))
         strategy = self._determine_strategy(bt, bert)
-        expected_macro_f1 = min((bt * 0.4 + bert * 0.4) * (budget / 5.0) + 0.5, 0.95)
-        expected_cost = (bt * 0.4 + bert * 0.2) * (budget / 5.0)
+        
+        # If strategy is "No Augmentation", force budget to 0
+        if strategy == "No Augmentation":
+            budget = 0
+            
+        expected_macro_f1 = min((bt * 0.4 + bert * 0.4) * (budget_raw / 5.0) + 0.5, 0.95)
+        expected_cost = (bt * 0.4 + bert * 0.2) * (budget_raw / 5.0)
         expected_utility = alpha_score
         confidence = min(alpha_score / 1.5, 1.0) if alpha_score > 0 else 0.0
         
-        reason = f"Based on FACI profile, GA-GWO selected {strategy} (Budget: {budget:.2f}) aiming for Expected Utility {expected_utility:.4f} and F1 {expected_macro_f1:.4f}."
+        reason = f"Based on FACI profile, GA-GWO selected {strategy} (Budget: {budget}) aiming for Expected Utility {expected_utility:.4f} and F1 {expected_macro_f1:.4f}."
         
         prediction = {
             "strategy": strategy,

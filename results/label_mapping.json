@@ -1,0 +1,7 @@
+{
+    "Unauthorized Transaction": 0,
+    "Identity Theft": 1,
+    "Card Fraud": 2,
+    "Account Takeover": 3,
+    "Phishing / Scam": 4
+}

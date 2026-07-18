@@ -8,6 +8,8 @@ class PolicyMemory:
         self.capacity = capacity
         self.csv_path = csv_path
         self.memory = []
+        
+        # GWO specific tracking
         self.alpha_wolves = []
         self.beta_wolves = []
         self.delta_wolves = []
@@ -18,90 +20,65 @@ class PolicyMemory:
             with open(self.csv_path, 'w', newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow([
-                    "Timestamp", "Chunk_ID", "Fitness", "Macro_F1", "Semantic_Pres", "Entity_Pres",
-                    "Cost", "BT_Ratio", "BERT_Ratio", "Budget", "Mask_Prob", "Sem_Thresh", 
-                    "Ent_Weight", "Chunk_Pri", "LR", "Strategy"
+                    "Timestamp", "Chunk_ID", "Strategy", "Fitness", "Macro_F1", 
+                    "Utility", "Confidence", "Cost", "FACI_Vector"
                 ])
                 
-    def add_state(self, chunk_id, policy, metrics, alpha, beta, delta, elite_pop, faci_dict=None):
+    def add_state(self, chunk_id, faci_vector, strategy, fitness, macro_f1, utility, confidence, cost, alpha=None, beta=None, delta=None, elite_pop=None):
         timestamp = datetime.datetime.now().isoformat()
-        
-        strategy = self._determine_strategy(policy[0], policy[1])
         
         entry = {
             "chunk_id": chunk_id,
             "timestamp": timestamp,
-            "policy": policy,
+            "faci_vector": faci_vector,
             "strategy": strategy,
-            "metrics": metrics,
+            "fitness": fitness,
+            "macro_f1": macro_f1,
+            "utility": utility,
+            "confidence": confidence,
+            "cost": cost,
             "alpha": alpha,
             "beta": beta,
             "delta": delta,
-            "elite_pop": elite_pop,
-            "faci_dict": faci_dict
+            "elite_pop": elite_pop or []
         }
         self.memory.append(entry)
         
-        self.alpha_wolves.append(alpha)
-        self.beta_wolves.append(beta)
-        self.delta_wolves.append(delta)
-        self.elite_population = elite_pop
+        if alpha is not None: self.alpha_wolves.append(alpha)
+        if beta is not None: self.beta_wolves.append(beta)
+        if delta is not None: self.delta_wolves.append(delta)
+        if elite_pop is not None: self.elite_population = elite_pop
 
         if len(self.memory) > self.capacity:
             self.memory.pop(0)
-            self.alpha_wolves.pop(0)
-            self.beta_wolves.pop(0)
-            self.delta_wolves.pop(0)
+            if self.alpha_wolves: self.alpha_wolves.pop(0)
+            if self.beta_wolves: self.beta_wolves.pop(0)
+            if self.delta_wolves: self.delta_wolves.pop(0)
             
         with open(self.csv_path, 'a', newline='') as f:
             writer = csv.writer(f)
             writer.writerow([
-                timestamp, chunk_id, 
-                metrics.get("fitness", 0), metrics.get("macro_f1", 0), 
-                metrics.get("semantic_preservation", 0), metrics.get("entity_preservation", 0),
-                metrics.get("cost", 0),
-                *policy, strategy
+                timestamp, chunk_id, strategy, fitness, macro_f1, 
+                utility, confidence, cost, str(faci_vector)
             ])
             
-    def _determine_strategy(self, p_bt, p_bert):
-        if p_bt == 0 and p_bert == 0:
-            return "No Augmentation"
-        elif p_bt > 0.5 and p_bert > 0.5:
-            return "Hybrid"
-        elif p_bt > p_bert:
-            return "Back Translation"
-        else:
-            return "BERT Contextual"
-            
     def get_last_alpha_beta_delta(self):
-        if self.alpha_wolves and self.beta_wolves and self.delta_wolves:
-            return self.alpha_wolves[-1], self.beta_wolves[-1], self.delta_wolves[-1]
-        return None, None, None
+        alpha = self.alpha_wolves[-1] if self.alpha_wolves else None
+        beta = self.beta_wolves[-1] if self.beta_wolves else None
+        delta = self.delta_wolves[-1] if self.delta_wolves else None
+        return alpha, beta, delta
         
     def get_elite_population(self):
         return self.elite_population
 
-    def get_elites_by_faci_similarity(self, current_faci):
-        if not self.memory or not current_faci:
+    def get_elites_by_faci_similarity(self, current_faci_vector):
+        """
+        Retrieve previous elites based on Cosine Similarity of FACI vectors.
+        """
+        if not self.memory or current_faci_vector is None:
             return self.elite_population
             
-        def _faci_vector(f_dict):
-            if not f_dict:
-                return np.zeros(10)
-            return np.array([
-                f_dict.get('complexity', 0),
-                f_dict.get('entity_density', 0),
-                f_dict.get('fraud_density', 0),
-                f_dict.get('risk_score', 0),
-                f_dict.get('ambiguity', 0),
-                f_dict.get('semantic_entropy', 0),
-                f_dict.get('rare_word_density', 0),
-                f_dict.get('redaction_density', 0),
-                f_dict.get('class_imbalance_factor', 1.0),
-                f_dict.get('recommended_budget', 1)
-            ])
-            
-        curr_vec = _faci_vector(current_faci)
+        curr_vec = np.array(current_faci_vector)
         norm_curr = np.linalg.norm(curr_vec)
         if norm_curr == 0:
             norm_curr = 1e-9
@@ -110,8 +87,8 @@ class PolicyMemory:
         best_elites = self.elite_population
         
         for entry in self.memory:
-            if 'faci_dict' in entry and entry['faci_dict']:
-                hist_vec = _faci_vector(entry['faci_dict'])
+            if 'faci_vector' in entry and entry['faci_vector'] is not None:
+                hist_vec = np.array(entry['faci_vector'])
                 norm_hist = np.linalg.norm(hist_vec)
                 if norm_hist == 0:
                     norm_hist = 1e-9
@@ -121,8 +98,7 @@ class PolicyMemory:
                 
                 if sim > best_sim:
                     best_sim = sim
-                    if 'elite_pop' in entry:
+                    if 'elite_pop' in entry and entry['elite_pop']:
                         best_elites = entry['elite_pop']
                     
         return best_elites
-

@@ -87,3 +87,48 @@ class IncrementalClassifier:
                 
         return final_loss
 
+    def evaluate(self, test_batch):
+        from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
+        import warnings
+        
+        if not self.model or not test_batch:
+            return {}
+            
+        self.model.eval()
+        texts = [item[0] for item in test_batch]
+        labels = [item[1] for item in test_batch]
+        
+        inputs = self.tokenizer(texts, padding=True, truncation=True, max_length=128, return_tensors="pt").to(self.device)
+        labels_tensor = torch.tensor(labels).to(self.device)
+        
+        with torch.no_grad():
+            outputs = self.model(**inputs)
+            logits = outputs.logits
+            loss = nn.CrossEntropyLoss()(logits, labels_tensor).item()
+            predictions = torch.argmax(logits, dim=-1).cpu().numpy()
+            
+        labels = labels_tensor.cpu().numpy()
+        
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            acc = accuracy_score(labels, predictions)
+            prec = precision_score(labels, predictions, average='macro', zero_division=0)
+            rec = recall_score(labels, predictions, average='macro', zero_division=0)
+            macro_f1 = f1_score(labels, predictions, average='macro', zero_division=0)
+            weighted_f1 = f1_score(labels, predictions, average='weighted', zero_division=0)
+            per_class_f1 = f1_score(labels, predictions, average=None, zero_division=0).tolist()
+            
+            # Pad per-class F1 if some classes are missing in test set
+            full_per_class = [0.0] * self.num_classes
+            for i, f1 in enumerate(per_class_f1):
+                full_per_class[i] = f1
+                
+        return {
+            "loss": loss,
+            "accuracy": acc,
+            "precision": prec,
+            "recall": rec,
+            "macro_f1": macro_f1,
+            "weighted_f1": weighted_f1,
+            "per_class_f1": full_per_class
+        }

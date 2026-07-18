@@ -24,15 +24,24 @@ class Augmentor:
         except Exception as e:
             logger.warning(f"Could not load BERT model: {e}")
             self.fill_mask = None
+            
+        self.validator = SemanticValidator(semantic_threshold=0.8, entity_weight=1.0)
 
     def back_translate(self, text):
         if not self.back_translation_aug:
             return text
+            
+        # Truncate to avoid max_length CUDA assert in Helsinki-NLP
+        words = text.split()
+        if len(words) > 350:
+            text = " ".join(words[:350])
+            
         try:
-            de = self.en_de(text)[0]['translation_text']
-            en = self.de_en(de)[0]['translation_text']
+            de = self.en_de(text, truncation=True, max_length=512)[0]['translation_text']
+            en = self.de_en(de, truncation=True, max_length=512)[0]['translation_text']
             return en
-        except Exception:
+        except Exception as e:
+            logger.warning(f"Back translation failed: {e}")
             return text
 
     def bert_masking(self, text, mask_prob):
@@ -40,10 +49,14 @@ class Augmentor:
             return text
         
         words = text.split()
+        if len(words) > 350:
+            words = words[:350]
+            text = " ".join(words)
+            
         if len(words) < 5:
             return text
             
-        protected_tokens = ["[CARD]", "[OTP]"]
+        protected_tokens = ["[CARD]", "[OTP]", "xxxx"]
         mask_candidates = [i for i, w in enumerate(words) if not any(p in w for p in protected_tokens) and w.isalpha()]
         
         if not mask_candidates:
@@ -54,7 +67,6 @@ class Augmentor:
             num_mask = len(mask_candidates)
             
         to_mask = random.sample(mask_candidates, num_mask)
-        
         for idx in to_mask:
             words[idx] = "[MASK]"
             
@@ -70,42 +82,45 @@ class Augmentor:
         except Exception:
             return text
 
-    def get_strategy(self, p_bt, p_bert, budget):
-        if budget < 1 or (p_bt < 0.2 and p_bert < 0.2):
-            return "No Augmentation"
-        elif p_bt > p_bert + 0.3:
-            return "Back Translation"
-        elif p_bert > p_bt + 0.3:
-            return "BERT Contextual"
-        else:
-            return "Back Translation + BERT"
-
-    def generate(self, text, entities, policy):
-        # [BT_Ratio, BERT_Ratio, Budget, MaskProbability, SemanticThreshold, EntityProtectionWeight, ChunkPriority, LR]
-        p_bt, p_bert, budget, mask_prob, sem_thresh, ent_weight, _, _ = policy
-        budget = int(round(budget))
+    def generate(self, text, label, chunk_id, prediction):
+        strategy = prediction.get("strategy", "No Augmentation")
+        budget = prediction.get("budget", 0)
         
-        validator = SemanticValidator(semantic_threshold=sem_thresh, entity_weight=ent_weight)
-        
-        strategy = self.get_strategy(p_bt, p_bert, budget)
         results = set()
         
-        if strategy == "No Augmentation":
+        if strategy == "No Augmentation" or budget <= 0:
             return []
             
+        # Hardcode mask prob for now, or could extract from policy if we had it
+        mask_prob = 0.15 
+        
+        entities = []
+        if "[OTP]" in text: entities.append("[OTP]")
+        if "[CARD]" in text: entities.append("[CARD]")
+        
         for _ in range(budget):
+            aug = text
             if strategy == "Back Translation":
                 aug = self.back_translate(text)
             elif strategy == "BERT Contextual":
                 aug = self.bert_masking(text, mask_prob)
-            else:
+            elif strategy == "Hybrid":
                 if random.random() < 0.5:
                     aug = self.back_translate(text)
                 else:
                     aug = self.bert_masking(text, mask_prob)
                     
-            if validator.validate(text, aug, entities, existing_samples=list(results)):
-                if aug != text:
-                    results.add(aug)
-                    
+            is_valid, reason = self.validator.validate_and_log(
+                chunk_id=chunk_id,
+                original_text=text,
+                augmented_text=aug,
+                original_label=label,
+                augmented_label=label,
+                entities=entities,
+                existing_samples=list(results)
+            )
+            
+            if is_valid and aug != text:
+                results.add(aug)
+                
         return list(results)

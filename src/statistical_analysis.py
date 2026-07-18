@@ -1,86 +1,95 @@
 import numpy as np
-import scipy.stats as stats
+from scipy import stats
 from statsmodels.stats.multitest import multipletests
-import logging
-
-logger = logging.getLogger(__name__)
+import pandas as pd
+import os
 
 class StatisticalAnalyzer:
-    def __init__(self):
-        self.results = {}
+    def __init__(self, results_dir="results"):
+        self.results_dir = results_dir
+        os.makedirs(self.results_dir, exist_ok=True)
         
-    def add_experiment_results(self, baseline_name, metric_values):
+    def _compute_effect_size(self, x, y):
+        """Computes Cohen's d effect size"""
+        nx, ny = len(x), len(y)
+        if nx < 2 or ny < 2: return 0.0
+        
+        dof = nx + ny - 2
+        var_x = np.var(x, ddof=1)
+        var_y = np.var(y, ddof=1)
+        pooled_std = np.sqrt(((nx - 1) * var_x + (ny - 1) * var_y) / dof)
+        
+        if pooled_std == 0: return 0.0
+        return (np.mean(x) - np.mean(y)) / pooled_std
+
+    def run_analysis(self, baseline_metrics_dict, target_metric="macro_f1"):
         """
-        metric_values: list of metric scores (e.g. F1 scores across multiple runs or chunks)
+        baseline_metrics_dict: dict { "baseline_name": [list of metric values across chunks] }
         """
-        self.results[baseline_name] = np.array(metric_values)
+        results = []
+        baselines = list(baseline_metrics_dict.keys())
         
-    def compute_summary_stats(self, baseline_name):
-        data = self.results.get(baseline_name, [])
-        if len(data) == 0:
-            return {}
-            
-        mean = np.mean(data)
-        std = np.std(data)
-        
-        # 95% CI
-        n = len(data)
-        se = std / np.sqrt(n)
-        ci_95 = stats.t.interval(0.95, n-1, loc=mean, scale=se) if n > 1 else (mean, mean)
-        
-        return {
-            "mean": mean,
-            "std": std,
-            "ci_95_lower": ci_95[0],
-            "ci_95_upper": ci_95[1]
-        }
-        
-    def compare_baselines(self, baseline1, baseline2):
-        data1 = self.results.get(baseline1, [])
-        data2 = self.results.get(baseline2, [])
-        
-        if len(data1) == 0 or len(data2) == 0 or len(data1) != len(data2):
-            logger.warning("Data size mismatch or empty for comparison.")
-            return {}
-            
-        # Wilcoxon signed-rank test
-        stat, p_value = stats.wilcoxon(data1, data2, zero_method='zsplit')
-        
-        # Effect size (Cohen's d)
-        mean_diff = np.mean(data1) - np.mean(data2)
-        pooled_std = np.sqrt((np.std(data1)**2 + np.std(data2)**2) / 2)
-        cohens_d = mean_diff / pooled_std if pooled_std > 0 else 0.0
-        
-        return {
-            "wilcoxon_stat": stat,
-            "p_value": p_value,
-            "effect_size": cohens_d
-        }
-        
-    def run_full_analysis(self, target_baseline="hybrid"):
-        analysis = {}
-        
-        # 1. Summary Stats
-        for name in self.results:
-            analysis[name] = {"summary": self.compute_summary_stats(name)}
-            
-        # 2. Comparisons with Target
-        p_values = []
-        comparisons = []
-        
-        for name in self.results:
-            if name != target_baseline:
-                comp = self.compare_baselines(target_baseline, name)
-                if "p_value" in comp:
-                    p_values.append(comp["p_value"])
-                    comparisons.append(name)
-                    analysis[name]["comparison_to_target"] = comp
+        # We need "Hybrid GA + GWO" as the proposed method to compare against
+        proposed_name = "Hybrid GA + GWO"
+        if proposed_name not in baselines:
+            # Try to find something with hybrid in it
+            for b in baselines:
+                if "hybrid" in b.lower():
+                    proposed_name = b
+                    break
                     
-        # 3. Holm-Bonferroni Correction
-        if p_values:
-            reject, pvals_corrected, _, _ = multipletests(p_values, alpha=0.05, method='holm')
-            for i, name in enumerate(comparisons):
-                analysis[name]["comparison_to_target"]["p_value_holm"] = pvals_corrected[i]
-                analysis[name]["comparison_to_target"]["significant"] = reject[i]
+        proposed_data = baseline_metrics_dict.get(proposed_name, [])
+        
+        for baseline in baselines:
+            data = baseline_metrics_dict[baseline]
+            if len(data) == 0:
+                continue
                 
-        return analysis
+            mean = np.mean(data)
+            std = np.std(data)
+            
+            # 95% CI
+            n = len(data)
+            sem = stats.sem(data) if n > 1 else 0
+            ci = stats.t.interval(0.95, n-1, loc=mean, scale=sem) if n > 1 and sem > 0 else (mean, mean)
+            
+            # Compare to proposed if not self
+            wilcoxon_p = 1.0
+            effect_size = 0.0
+            
+            if baseline != proposed_name and len(data) == len(proposed_data) and len(data) >= 2:
+                try:
+                    stat, wilcoxon_p = stats.wilcoxon(proposed_data, data)
+                except ValueError:
+                    wilcoxon_p = 1.0
+                
+                effect_size = self._compute_effect_size(proposed_data, data)
+                
+            results.append({
+                "Method": baseline,
+                "Mean": mean,
+                "Std": std,
+                "CI_Lower": ci[0],
+                "CI_Upper": ci[1],
+                "Wilcoxon_p": wilcoxon_p,
+                "Effect_Size": effect_size
+            })
+            
+        if len(results) == 0:
+            return pd.DataFrame()
+            
+        df = pd.DataFrame(results)
+        
+        # Holm Correction on p-values
+        # Only apply to those that were compared
+        p_vals = df['Wilcoxon_p'].values
+        valid_idx = np.where(p_vals < 1.0)[0]
+        
+        if len(valid_idx) > 0:
+            reject, pvals_corrected, _, _ = multipletests(p_vals[valid_idx], alpha=0.05, method='holm')
+            df.loc[valid_idx, 'Wilcoxon_p_Holm'] = pvals_corrected
+        else:
+            df['Wilcoxon_p_Holm'] = p_vals
+            
+        df.to_csv(os.path.join(self.results_dir, "statistical_analysis.csv"), index=False)
+        return df

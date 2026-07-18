@@ -2,23 +2,18 @@ project_title: "Nature-Inspired Augmentation Selection for Cyber Banking Data Aw
 experiment_name: "experiment_001"
 
 runtime:
-  mode: "simulation"
-  baseline_modes: ["no_aug", "random", "fixed_bt", "fixed_bert", "rule_based", "ga_only", "gwo_only", "hybrid"]
-  chunk_size: 32
-  total_samples: 320
-  faci_threshold: 0.5
+  chunk_size: 10
   random_seed: 42
 
 paths:
   data_dir: "./data"
   src_dir: "./src"
-  models_dir: "./models"
-  outputs_dir: "./outputs"
   results_dir: "./results"
   visualizations_dir: "./visualizations"
-  checkpoints_dir: "./checkpoints"
 
 logging:
-  level: "INFO"
-  log_to_file: True
-
+  save_all_results: false
+  save_debug_logs: false
+  save_intermediate_plots: false
+  save_per_generation_logs: false
+  debug: false
