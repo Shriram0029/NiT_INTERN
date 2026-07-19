@@ -1,0 +1,26 @@
+﻿2026-07-19 14:20:18,909 - MasterPipeline - INFO - Initializing pipeline ù Seed=42, Run=1, FACI=True, PM=True, GA=True, GWO=True, SEM=True, RB=True
+python : Device set to use cpu
+At line:1 char:1
++ python main.py > full_output.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Device set to use cpu:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Device set to use cpu
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertForMaskedLM: 
+['bert.pooler.dense.bias', 'bert.pooler.dense.weight', 'cls.seq_relationship.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BertForMaskedLM from the checkpoint of a model trained on another task or 
+with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertForMaskedLM from the checkpoint of a model that you expect to be 
+exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Device set to use cpu
+Some weights of RobertaForSequenceClassification were not initialized from the model checkpoint at roberta-base and 
+are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 
+'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2026-07-19 14:20:22,645 - MasterPipeline - INFO - --- Running Baseline: No Augmentation (Run 1, Seed 42) ---
+Some weights of RobertaForSequenceClassification were not initialized from the model checkpoint at roberta-base and 
+are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 
+'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2026-07-19 14:20:35,177 - MasterPipeline - DEBUG - [No Augmentation] Chunk 00 | FACI: 0.222 | Strat: No Augmentation      | Budg: 0 | Fit: 0.000 | Loss: 1.715 | F1: 0.000 | RepSize: 10 | Acc: 0 | Rej: 0 | Time: 12.0s | Mem: 0.3MB

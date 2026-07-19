@@ -23,9 +23,12 @@ class GeneticAlgorithm:
         self.mutation_history = []
         self.selection_pressure_history = []
         
+        self.fitness_cache = {}
+        
     def _initialize_population(self):
         pop = []
         if self.memory:
+            # Reusing past elites
             elites = self.memory.get_elites_by_faci_similarity(self.faci)
             if elites:
                 for p in elites:
@@ -42,6 +45,11 @@ class GeneticAlgorithm:
         return np.mean(np.std(self.population, axis=0))
         
     def fitness_function(self, chromosome):
+        # Fitness Caching
+        chrom_tuple = tuple(np.round(chromosome, 4))
+        if chrom_tuple in self.fitness_cache:
+            return self.fitness_cache[chrom_tuple]
+            
         bt, bert, budget, mask, sem, ent, pri, lr = chromosome
         
         # Estimate expected metrics based on strategy
@@ -52,14 +60,9 @@ class GeneticAlgorithm:
         
         comp_cost = (bt * 0.4 + bert * 0.2) * (budget / 5.0)
         
-        cif = self.faci.get('class_imbalance_factor', 1.0) if self.faci else 1.0
-        minority_gain = (budget / 5.0) * (1.0 - 1.0/cif) if cif > 1.0 else 0.0
+        cif = self.faci.get('class_imbalance_factor', 1.0) if hasattr(self.faci, 'get') else 1.0
+        minority_gain = (budget / 5.0) * (1.0 - 1.0/max(cif, 1e-9)) if cif > 1.0 else 0.0
         augmentation_fairness = 1.0 - abs(bt - bert) * 0.5
-        
-        # Exact Formula:
-        # 0.35 MacroF1 + 0.20 Minority Gain + 0.15 Entity Preservation + 
-        # 0.10 Semantic Similarity + 0.10 Diversity + 0.10 Augmentation Fairness - 
-        # 0.10 Computational Cost
         
         fitness = (
             0.35 * macro_f1 + 
@@ -70,6 +73,8 @@ class GeneticAlgorithm:
             0.10 * augmentation_fairness - 
             0.10 * comp_cost
         )
+        
+        self.fitness_cache[chrom_tuple] = fitness
         return fitness
         
     def _tournament_selection(self, fitnesses, k=3):
@@ -93,14 +98,28 @@ class GeneticAlgorithm:
         return ind
         
     def optimize(self):
-        cif = self.faci.get('class_imbalance_factor', 1.0) if self.faci else 1.0
+        cif = self.faci.get('class_imbalance_factor', 1.0) if hasattr(self.faci, 'get') else 1.0
+        
+        best_overall_fitness = -float('inf')
+        generations_without_improvement = 0
         
         for gen in range(self.generations):
             fitnesses = [self.fitness_function(ind) for ind in self.population]
-            self.fitness_history.append(max(fitnesses))
+            max_fit = np.max(fitnesses)
+            self.fitness_history.append(max_fit)
+            
+            # Early Stopping Check
+            if max_fit > best_overall_fitness:
+                best_overall_fitness = max_fit
+                generations_without_improvement = 0
+            else:
+                generations_without_improvement += 1
+                
+            if generations_without_improvement >= 5:
+                # Terminate early when no improvement for 5 generations
+                break
             
             avg_fit = np.mean(fitnesses)
-            max_fit = np.max(fitnesses)
             selection_pressure = max_fit / (avg_fit + 1e-9)
             self.selection_pressure_history.append(selection_pressure)
             
@@ -112,7 +131,7 @@ class GeneticAlgorithm:
             # Dynamic Mutation Rate based on diversity and class imbalance
             base_mut = self.base_mutation_rate
             if cif > 2.0:
-                base_mut *= 1.5 # more exploration for high imbalance
+                base_mut *= 1.5
                 
             if diversity < target_diversity:
                 current_mut_rate = min(base_mut * 2.0, 0.5)
@@ -121,6 +140,7 @@ class GeneticAlgorithm:
                 
             self.mutation_history.append(current_mut_rate)
             
+            # Elite Preservation
             elite_indices = np.argsort(fitnesses)[-self.elite_size:]
             new_pop = [self.population[i] for i in elite_indices]
             
@@ -146,4 +166,3 @@ class GeneticAlgorithm:
         }
         
         return elite_policies, metrics
-

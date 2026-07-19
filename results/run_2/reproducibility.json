@@ -1,0 +1,18 @@
+{
+    "Random Seed": 123,
+    "Configuration": "Hybrid GA+GWO Framework (Tuned)",
+    "Hyperparameters": {
+        "learning_rate": 0.026961814961209155,
+        "batch_size": 64,
+        "epochs": 3,
+        "aug_budget_max": 3,
+        "semantic_threshold": 0.6482094852489952
+    },
+    "Execution Timestamp": "2026-07-19T17:49:04.915169",
+    "Software Versions": {
+        "Python": "3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:20:11) [MSC v.1938 64 bit (AMD64)]",
+        "Torch": "2.11.0+cu128",
+        "Numpy": "1.26.4",
+        "Pandas": "3.0.2"
+    }
+}

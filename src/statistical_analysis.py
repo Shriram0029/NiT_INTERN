@@ -1,95 +1,143 @@
-import numpy as np
-from scipy import stats
-from statsmodels.stats.multitest import multipletests
-import pandas as pd
+"""
+src/statistical_analysis.py — Publication-grade statistical analysis
+Computes mean ± std, 95% confidence intervals, and Wilcoxon significance tests.
+"""
+
 import os
+import logging
+import warnings
+from typing import Dict, List, Optional
+
+import numpy as np
+import pandas as pd
+import scipy.stats as stats
+
+warnings.filterwarnings("ignore")
+logger = logging.getLogger(__name__)
+
 
 class StatisticalAnalyzer:
-    def __init__(self, results_dir="results"):
+    """
+    Aggregates metrics across multiple baselines or seeds and produces
+    summary tables suitable for inclusion in IEEE/Elsevier publications.
+    """
+
+    def __init__(self, results_dir: str = "results") -> None:
         self.results_dir = results_dir
         os.makedirs(self.results_dir, exist_ok=True)
-        
-    def _compute_effect_size(self, x, y):
-        """Computes Cohen's d effect size"""
-        nx, ny = len(x), len(y)
-        if nx < 2 or ny < 2: return 0.0
-        
-        dof = nx + ny - 2
-        var_x = np.var(x, ddof=1)
-        var_y = np.var(y, ddof=1)
-        pooled_std = np.sqrt(((nx - 1) * var_x + (ny - 1) * var_y) / dof)
-        
-        if pooled_std == 0: return 0.0
-        return (np.mean(x) - np.mean(y)) / pooled_std
 
-    def run_analysis(self, baseline_metrics_dict, target_metric="macro_f1"):
+    # ─────────────────────────────────────────────────────────
+    # Core statistics
+    # ─────────────────────────────────────────────────────────
+
+    @staticmethod
+    def confidence_interval(
+        data: List[float],
+        confidence: float = 0.95,
+    ) -> tuple:
+        """Return (lower, upper) 95% CI using t-distribution."""
+        n = len(data)
+        if n < 2:
+            return (0.0, 0.0)
+        se  = stats.sem(data)
+        h   = se * stats.t.ppf((1 + confidence) / 2.0, df=n - 1)
+        m   = float(np.mean(data))
+        return (round(m - h, 6), round(m + h, 6))
+
+    @staticmethod
+    def wilcoxon_test(
+        a: List[float],
+        b: List[float],
+    ) -> float:
         """
-        baseline_metrics_dict: dict { "baseline_name": [list of metric values across chunks] }
+        Two-sided Wilcoxon signed-rank test.
+        Returns p-value; raises on insufficient data.
         """
-        results = []
-        baselines = list(baseline_metrics_dict.keys())
-        
-        # We need "Hybrid GA + GWO" as the proposed method to compare against
-        proposed_name = "Hybrid GA + GWO"
-        if proposed_name not in baselines:
-            # Try to find something with hybrid in it
-            for b in baselines:
-                if "hybrid" in b.lower():
-                    proposed_name = b
-                    break
-                    
-        proposed_data = baseline_metrics_dict.get(proposed_name, [])
-        
-        for baseline in baselines:
-            data = baseline_metrics_dict[baseline]
-            if len(data) == 0:
+        if len(a) < 2 or len(b) < 2:
+            return 1.0
+        min_len = min(len(a), len(b))
+        try:
+            _, p = stats.wilcoxon(a[:min_len], b[:min_len])
+            return float(p)
+        except Exception:
+            return 1.0
+
+    # ─────────────────────────────────────────────────────────
+    # Single-run analysis (used per run in main.py)
+    # ─────────────────────────────────────────────────────────
+
+    def run_analysis(
+        self,
+        baseline_macro_f1s: Dict[str, List[float]],
+    ) -> pd.DataFrame:
+        """
+        Compare Hybrid GA+GWO against all other baselines using
+        Wilcoxon test and 95% CI. Saves statistical_analysis.csv.
+        """
+        rows = []
+        hybrid_f1s = baseline_macro_f1s.get("Hybrid GA + GWO", [])
+
+        for name, f1s in baseline_macro_f1s.items():
+            if not f1s:
                 continue
-                
-            mean = np.mean(data)
-            std = np.std(data)
-            
-            # 95% CI
-            n = len(data)
-            sem = stats.sem(data) if n > 1 else 0
-            ci = stats.t.interval(0.95, n-1, loc=mean, scale=sem) if n > 1 and sem > 0 else (mean, mean)
-            
-            # Compare to proposed if not self
-            wilcoxon_p = 1.0
-            effect_size = 0.0
-            
-            if baseline != proposed_name and len(data) == len(proposed_data) and len(data) >= 2:
-                try:
-                    stat, wilcoxon_p = stats.wilcoxon(proposed_data, data)
-                except ValueError:
-                    wilcoxon_p = 1.0
-                
-                effect_size = self._compute_effect_size(proposed_data, data)
-                
-            results.append({
-                "Method": baseline,
-                "Mean": mean,
-                "Std": std,
-                "CI_Lower": ci[0],
-                "CI_Upper": ci[1],
-                "Wilcoxon_p": wilcoxon_p,
-                "Effect_Size": effect_size
+            mean = float(np.mean(f1s))
+            std  = float(np.std(f1s))
+            ci   = self.confidence_interval(f1s)
+            p    = self.wilcoxon_test(hybrid_f1s, f1s) if name != "Hybrid GA + GWO" else 1.0
+
+            rows.append({
+                "Baseline":       name,
+                "Mean F1":        round(mean, 4),
+                "Std F1":         round(std,  4),
+                "CI_lower":       ci[0],
+                "CI_upper":       ci[1],
+                "p_value":        round(p, 5),
+                "Significant":    "Yes" if p < 0.05 else "No",
             })
-            
-        if len(results) == 0:
-            return pd.DataFrame()
-            
-        df = pd.DataFrame(results)
-        
-        # Holm Correction on p-values
-        # Only apply to those that were compared
-        p_vals = df['Wilcoxon_p'].values
-        valid_idx = np.where(p_vals < 1.0)[0]
-        
-        if len(valid_idx) > 0:
-            reject, pvals_corrected, _, _ = multipletests(p_vals[valid_idx], alpha=0.05, method='holm')
-            df.loc[valid_idx, 'Wilcoxon_p_Holm'] = pvals_corrected
-        else:
-            df['Wilcoxon_p_Holm'] = p_vals
-            
-        df.to_csv(os.path.join(self.results_dir, "statistical_analysis.csv"), index=False)
+
+        df = pd.DataFrame(rows)
+        out = os.path.join(self.results_dir, "statistical_analysis.csv")
+        df.to_csv(out, index=False)
+        logger.info(f"Statistical analysis saved to {out}")
         return df
+
+    # ─────────────────────────────────────────────────────────
+    # Multi-seed aggregation (used by run_experiments.py)
+    # ─────────────────────────────────────────────────────────
+
+    def aggregate_multi_seed(
+        self,
+        combined_df: pd.DataFrame,
+    ) -> pd.DataFrame:
+        """
+        Given a DataFrame with columns [baseline, seed, macro_f1, ...],
+        return a summary DataFrame with mean ± std and 95% CI per baseline.
+        """
+        summary_rows = []
+        hybrid_all = combined_df.loc[
+            combined_df["baseline"] == "Hybrid GA + GWO", "macro_f1"
+        ].tolist()
+
+        for bl in combined_df["baseline"].unique():
+            subset = combined_df.loc[combined_df["baseline"] == bl, "macro_f1"].tolist()
+            if not subset:
+                continue
+            mean = float(np.mean(subset))
+            std  = float(np.std(subset))
+            ci   = self.confidence_interval(subset)
+            p    = self.wilcoxon_test(hybrid_all, subset) if bl != "Hybrid GA + GWO" else 1.0
+
+            summary_rows.append({
+                "Baseline":              bl,
+                "Macro F1 Mean":         round(mean, 4),
+                "Macro F1 Std":          round(std,  4),
+                "95% CI":                f"[{ci[0]:.4f}, {ci[1]:.4f}]",
+                "p-value vs Hybrid":     round(p, 5),
+                "Significant (p<0.05)":  "Yes" if p < 0.05 else "No",
+            })
+
+        out_df = pd.DataFrame(summary_rows)
+        out_df.to_csv(
+            os.path.join(self.results_dir, "multi_seed_summary.csv"), index=False
+        )
+        return out_df

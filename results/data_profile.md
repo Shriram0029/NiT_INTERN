@@ -2,15 +2,17 @@
 
 ## Dataset Overview
 - **Dataset Size**: 149
-- **Available Columns**: date_received, product, sub_product, issue, sub_issue, complaint_what_happened, company_public_response, company, state, zip_code, tags, consumer_consent_provided, submitted_via, date_sent_to_company, company_response, timely, consumer_disputed, complaint_id
-- **Complaint Text Column**: complaint_what_happened
-- **Label Column**: Derived from Product/Issue
-- **Missing Values / Empty %**: 64.43%
+- **Complaint Column Detected**: complaint_what_happened
+- **Product Column Detected**: product
+- **Issue Column Detected**: issue
+- **Sub Issue Column Detected**: sub_issue
+- **Missing %**: 64.43%
 - **Duplicate %**: 0.00%
-- **Redaction % (Highly Redacted)**: 0.00%
+- **Redacted %**: 0.00%
 - **Average Complaint Length (words)**: 186.25
+- **Vocabulary Size**: 1791
 
-## Label Distribution (Raw 'Issue' Column)
+## Class Distribution (Based on raw issue/label)
 - Incorrect information on your report: 61
 - Improper use of your report: 17
 - Problem with a credit reporting company's investigation into an existing problem: 9
@@ -21,14 +23,13 @@
 - Problem with a purchase shown on your statement: 4
 - Advertising and marketing, including promotional offers: 3
 - False statements or representation: 3
-
-## Example Complaints
-
-**Example 1**:
-These are not my accounts....
-
-**Example 2**:
-Kindly address this issue on my credit report. I assert that this account is not mine and believe it to be fraudulent. I urge you to correct this mistake and have provided supporting documents for verification....
-
-**Example 3**:
-I wrote three requests, the unverified accounts listed below still remain on my credit report in violation of Federal Law. Equifax is under FCRA law to obtain the of the original creditors documentation on file to verify that this information is mine and is correct. I have already filed a FTC Report and Police Report. Who verified these accounts? You have NOT provided me a copy of ANY original documentation ( a consumer contract with my signature on it ) as required under Section 609 ( a ) ( 1 )...
+- Dealing with your lender or servicer: 2
+- Struggling to pay mortgage: 2
+- Communication tactics: 2
+- Problem with a lender or other company charging your account: 2
+- Account opening, closing, or management: 1
+- Other features, terms, or problems: 1
+- Trouble using the card: 1
+- Loan modification,collection,foreclosure: 1
+- Problem when making payments: 1
+- Took or threatened to take negative or legal action: 1

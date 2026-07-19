@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import unicodedata
 from collections import Counter
 from sklearn.model_selection import train_test_split
 
@@ -13,12 +14,11 @@ class DataPipeline:
         self.cyber_keywords = [
             "unauthorized transaction", "identity theft", "card fraud",
             "account takeover", "online banking fraud", "upi fraud",
-            "phishing", "scam", "wire fraud", "payment fraud"
+            "payment fraud", "phishing", "scam", "wire transfer fraud", "fraud"
         ]
         
         self.reject_keywords = [
-            "mortgage", "home loan", "vehicle loan", "general credit disputes",
-            "debt collection", "billing errors"
+            "mortgage", "vehicle loan", "student loan", "debt collection", "billing errors"
         ]
         
         self.supported_classes = [
@@ -53,16 +53,17 @@ class DataPipeline:
         redacted_count = 0
         total_words = 0
         seen_narratives = set()
-        
-        available_columns = list(raw_data[0].keys()) if total_size > 0 else []
+        vocab = set()
         
         labels = Counter()
         
         for item in raw_data:
             text = item.get("complaint_what_happened", "")
-            labels[item.get("issue", "Unknown")] += 1
+            # Assuming 'label' might not exist, but let's check
+            label = item.get("label", item.get("issue", "Unknown"))
+            labels[label] += 1
             
-            if not text.strip():
+            if not text or not text.strip():
                 empty_count += 1
                 continue
                 
@@ -72,38 +73,38 @@ class DataPipeline:
             
             words = text.split()
             total_words += len(words)
+            vocab.update(w.lower() for w in words)
             
-            # Count highly redacted
+            # Count highly redacted (fully redacted)
             redactions = sum(1 for w in words if 'xxxx' in w.lower())
-            if len(words) > 0 and redactions / len(words) > 0.8:
+            if len(words) > 0 and redactions == len(words):
                 redacted_count += 1
                 
         avg_length = total_words / max((total_size - empty_count), 1)
         empty_pct = (empty_count / max(total_size, 1)) * 100
         duplicate_pct = (duplicate_count / max(total_size, 1)) * 100
         redacted_pct = (redacted_count / max(total_size, 1)) * 100
+        vocab_size = len(vocab)
         
         report = f"""# Data Profile
 
 ## Dataset Overview
 - **Dataset Size**: {total_size}
-- **Available Columns**: {', '.join(available_columns)}
-- **Complaint Text Column**: complaint_what_happened
-- **Label Column**: Derived from Product/Issue
-- **Missing Values / Empty %**: {empty_pct:.2f}%
+- **Complaint Column Detected**: complaint_what_happened
+- **Product Column Detected**: product
+- **Issue Column Detected**: issue
+- **Sub Issue Column Detected**: sub_issue
+- **Missing %**: {empty_pct:.2f}%
 - **Duplicate %**: {duplicate_pct:.2f}%
-- **Redaction % (Highly Redacted)**: {redacted_pct:.2f}%
+- **Redacted %**: {redacted_pct:.2f}%
 - **Average Complaint Length (words)**: {avg_length:.2f}
+- **Vocabulary Size**: {vocab_size}
 
-## Label Distribution (Raw 'Issue' Column)
+## Class Distribution (Based on raw issue/label)
 """
-        for lbl, cnt in labels.most_common(10):
+        for lbl, cnt in labels.most_common(20):
             report += f"- {lbl}: {cnt}\n"
             
-        report += "\n## Example Complaints\n"
-        for i, item in enumerate([x for x in raw_data if x.get("complaint_what_happened", "").strip()][:3]):
-            report += f"\n**Example {i+1}**:\n{item['complaint_what_happened'][:500]}...\n"
-
         with open(os.path.join(self.results_dir, "data_profile.md"), "w", encoding="utf-8") as f:
             f.write(report)
             
@@ -115,7 +116,7 @@ class DataPipeline:
             has_cyber = any(kw in text for kw in self.cyber_keywords)
             has_reject = any(kw in text for kw in self.reject_keywords)
             
-            if has_cyber or (not has_reject): # If it has reject words but is fraud related, we keep it.
+            if has_cyber or (not has_reject): 
                 filtered.append(item)
         return filtered
         
@@ -126,29 +127,33 @@ class DataPipeline:
         for item in data:
             text = item.get("complaint_what_happened", "")
             
-            # Lowercase & Whitespace
-            text = text.lower()
-            text = re.sub(r'\s+', ' ', text).strip()
-            
-            if not text:
+            if not text or not text.strip():
                 continue
                 
+            # Normalize: Lowercase, Unicode, Whitespace
+            text = str(text).lower()
+            text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('utf-8')
+            text = re.sub(r'\s+', ' ', text).strip()
+            
             words = text.split()
             if len(words) < 5:
                 continue
                 
-            # Full redaction check
+            # Fully redacted check
             redactions = sum(1 for w in words if 'xxxx' in w)
-            if redactions == len(words):
+            if len(words) > 0 and redactions == len(words):
                 continue
                 
             if text in seen:
                 continue
             seen.add(text)
             
-            # Masking
-            text = re.sub(r'\b\d{6}\b', '[OTP]', text)
-            text = re.sub(r'\b(?:\d[ -]*?){13,16}\b', '[CARD]', text)
+            # Masking Patterns
+            text = re.sub(r'\b\d{4,6}\b', '[OTP]', text) # Simplified OTP masking
+            text = re.sub(r'\b(?:\d[ -]*?){13,16}\b', '[CARD]', text) # Card masking
+            text = re.sub(r'\b\d{9,18}\b', '[ACCOUNT]', text) # Account number
+            text = re.sub(r'\b[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}\.[a-zA-Z]{2,10}\b', '[UPI]', text) # UPI / Email
+            text = re.sub(r'\b[A-Z]{4}0[A-Z0-9]{6}\b', '[IFSC]', text) # IFSC code
             
             item["complaint_what_happened_clean"] = text
             cleaned.append(item)
@@ -158,9 +163,14 @@ class DataPipeline:
     def assign_labels(self, data):
         labeled = []
         for item in data:
+            if "label" in item and item["label"] in self.supported_classes:
+                # Label already exists and is supported
+                labeled.append(item)
+                continue
+                
             text = (item.get("product", "") + " " + item.get("issue", "") + " " + item.get("sub_issue", "")).lower()
             
-            assigned_label = "Unknown"
+            assigned_label = "Phishing / Scam" # Default fallback for cyber-filtered data
             if "unauthorized" in text or "recognize" in text:
                 assigned_label = "Unauthorized Transaction"
             elif "identity" in text or "belong" in text:
@@ -176,6 +186,7 @@ class DataPipeline:
                 if "unauthorized" in comp_text: assigned_label = "Unauthorized Transaction"
                 elif "identity" in comp_text: assigned_label = "Identity Theft"
                 elif "card" in comp_text: assigned_label = "Card Fraud"
+                elif "takeover" in comp_text: assigned_label = "Account Takeover"
                 elif "scam" in comp_text or "fraud" in comp_text: assigned_label = "Phishing / Scam"
                 else: assigned_label = "Unauthorized Transaction"
                 
@@ -192,12 +203,15 @@ class DataPipeline:
         labels = [item["label"] for item in data]
         
         try:
-            train_val, test = train_test_split(data, test_size=0.1, stratify=labels, random_state=42)
+            # Train (80%), Val (10%), Test (10%)
+            train_val, test = train_test_split(data, test_size=0.10, stratify=labels, random_state=42)
             train_val_labels = [item["label"] for item in train_val]
-            train, val = train_test_split(train_val, test_size=0.1111, stratify=train_val_labels, random_state=42) 
+            # Validation is 1/9 of train_val to get 10% of total
+            train, val = train_test_split(train_val, test_size=1/9, stratify=train_val_labels, random_state=42) 
         except ValueError:
-            train, test = train_test_split(data, test_size=0.1, random_state=42)
-            train, val = train_test_split(train, test_size=0.1111, random_state=42)
+            # Fallback if classes are too small for stratified split
+            train_val, test = train_test_split(data, test_size=0.10, random_state=42)
+            train, val = train_test_split(train_val, test_size=1/9, random_state=42)
             
         data_dir = os.path.dirname(self.data_path)
         with open(os.path.join(data_dir, "train.json"), "w", encoding="utf-8") as f:

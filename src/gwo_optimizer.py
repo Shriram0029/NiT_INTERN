@@ -49,7 +49,12 @@ class GWOOptimizer:
         beta_pos, beta_score = None, float('-inf')
         delta_pos, delta_score = None, float('-inf')
         
+        convergence_threshold = 1e-4
+        no_improvement_iters = 0
+        
         for t in range(self.max_iter):
+            best_score_this_iter = float('-inf')
+            
             for i in range(self.num_wolves):
                 positions[i] = self._clip(positions[i])
                 score = fitness_function(positions[i])
@@ -64,6 +69,12 @@ class GWOOptimizer:
                 elif score > delta_score:
                     delta_score, delta_pos = score, positions[i].copy()
                     
+            if alpha_score > best_score_this_iter:
+                if len(self.alpha_fitness_history) > 0 and (alpha_score - self.alpha_fitness_history[-1]) < convergence_threshold:
+                    no_improvement_iters += 1
+                else:
+                    no_improvement_iters = 0
+            
             self.fitness_history.append(alpha_score)
             self.alpha_fitness_history.append(alpha_score)
             self.beta_fitness_history.append(beta_score)
@@ -72,11 +83,17 @@ class GWOOptimizer:
             # Calculate mean wolf distance
             mean_pos = np.mean(positions, axis=0)
             distances = [np.linalg.norm(pos - mean_pos) for pos in positions]
-            self.wolf_distance_history.append(np.mean(distances))
+            mean_distance = np.mean(distances)
+            self.wolf_distance_history.append(mean_distance)
             
             a = self.a_start - t * ((self.a_start - self.a_end) / self.max_iter)
             self.search_radius_history.append(a)
             
+            # Convergence detection check
+            if mean_distance < convergence_threshold or no_improvement_iters >= 3:
+                # Early termination detected
+                break
+                
             for i in range(self.num_wolves):
                 for j in range(self.num_dim):
                     r1, r2 = random.random(), random.random()
@@ -106,4 +123,3 @@ class GWOOptimizer:
         }
                     
         return alpha_pos, beta_pos, delta_pos, alpha_score, metrics
-

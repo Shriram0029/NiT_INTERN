@@ -14,24 +14,35 @@ class PolicyMemory:
         self.beta_wolves = []
         self.delta_wolves = []
         self.elite_population = []
+        self.seen_alphas = set() # For deduplication
         
         os.makedirs(os.path.dirname(self.csv_path), exist_ok=True)
         if not os.path.exists(self.csv_path):
             with open(self.csv_path, 'w', newline='') as f:
                 writer = csv.writer(f)
                 writer.writerow([
-                    "Timestamp", "Chunk_ID", "Strategy", "Fitness", "Macro_F1", 
+                    "Timestamp", "Chunk_ID", "Strategy", "Budget", "Fitness", "Macro_F1", 
                     "Utility", "Confidence", "Cost", "FACI_Vector"
                 ])
                 
-    def add_state(self, chunk_id, faci_vector, strategy, fitness, macro_f1, utility, confidence, cost, alpha=None, beta=None, delta=None, elite_pop=None):
+    def add_state(self, chunk_id, faci_vector, strategy, fitness, macro_f1, utility, confidence, cost, budget=0, alpha=None, beta=None, delta=None, elite_pop=None):
         timestamp = datetime.datetime.now().isoformat()
+        
+        # Deduplication check
+        if alpha is not None:
+            alpha_tuple = tuple(np.round(alpha, 4))
+            if alpha_tuple in self.seen_alphas:
+                # If we've seen this exact policy, we might not want to add it to elites again
+                pass 
+            else:
+                self.seen_alphas.add(alpha_tuple)
         
         entry = {
             "chunk_id": chunk_id,
             "timestamp": timestamp,
             "faci_vector": faci_vector,
             "strategy": strategy,
+            "budget": budget,
             "fitness": fitness,
             "macro_f1": macro_f1,
             "utility": utility,
@@ -42,15 +53,29 @@ class PolicyMemory:
             "delta": delta,
             "elite_pop": elite_pop or []
         }
+        
         self.memory.append(entry)
         
         if alpha is not None: self.alpha_wolves.append(alpha)
         if beta is not None: self.beta_wolves.append(beta)
         if delta is not None: self.delta_wolves.append(delta)
-        if elite_pop is not None: self.elite_population = elite_pop
+        if elite_pop is not None and len(elite_pop) > 0: 
+            # Deduplicate elites before assigning
+            unique_elites = []
+            seen_elites = set()
+            for e in elite_pop:
+                t = tuple(np.round(e, 4))
+                if t not in seen_elites:
+                    seen_elites.add(t)
+                    unique_elites.append(e)
+            self.elite_population = unique_elites
 
         if len(self.memory) > self.capacity:
-            self.memory.pop(0)
+            removed = self.memory.pop(0)
+            if removed.get("alpha") is not None:
+                a_t = tuple(np.round(removed["alpha"], 4))
+                if a_t in self.seen_alphas:
+                    self.seen_alphas.remove(a_t)
             if self.alpha_wolves: self.alpha_wolves.pop(0)
             if self.beta_wolves: self.beta_wolves.pop(0)
             if self.delta_wolves: self.delta_wolves.pop(0)
@@ -58,7 +83,7 @@ class PolicyMemory:
         with open(self.csv_path, 'a', newline='') as f:
             writer = csv.writer(f)
             writer.writerow([
-                timestamp, chunk_id, strategy, fitness, macro_f1, 
+                timestamp, chunk_id, strategy, budget, fitness, macro_f1, 
                 utility, confidence, cost, str(faci_vector)
             ])
             
@@ -100,5 +125,5 @@ class PolicyMemory:
                     best_sim = sim
                     if 'elite_pop' in entry and entry['elite_pop']:
                         best_elites = entry['elite_pop']
-                    
+                        
         return best_elites

@@ -1,11 +1,18 @@
 import math
+import os
+import csv
 from collections import Counter
 
 class FACICalculator:
-    FRAUD_KEYWORDS = {"scam", "fraud", "steal", "stolen", "unauthorized", "phishing", "fake", "recognize", "identity"}
-    RISK_INDICATORS = {"stolen card", "large amount", "hacked", "breach"}
-    AMBIGUITY_INDICATORS = {"maybe", "not sure", "possibly", "might"}
+    FRAUD_KEYWORDS = {"scam", "fraud", "steal", "stolen", "unauthorized", "phishing", "fake", "recognize", "identity", "takeover"}
+    RISK_INDICATORS = {"stolen card", "large amount", "hacked", "breach", "compromised", "police"}
+    AMBIGUITY_INDICATORS = {"maybe", "not sure", "possibly", "might", "could", "perhaps"}
     
+    def __init__(self, results_dir="results"):
+        self.results_dir = results_dir
+        os.makedirs(self.results_dir, exist_ok=True)
+        self.history = []
+        
     def compute(self, text, entity_density=0.0):
         """
         Computes the Fraud-Aware Complexity Index (FACI) in a Multi-Dimensional format.
@@ -17,7 +24,7 @@ class FACICalculator:
         # 1. Complexity (Normalized to 0-1)
         complexity = min(len(tokens) / 300.0, 1.0)
         
-        # 2. Entity Density (Assuming it's passed as a ratio 0-1)
+        # 2. Entity Density
         e_density = min(entity_density, 1.0)
         
         # 3. Fraud Density (Normalized)
@@ -52,10 +59,10 @@ class FACICalculator:
         ]
         
         # Calculate scalar for rough budgeting fallback
-        w_C, w_E, w_F, w_R, w_A = 0.2, 0.2, 0.2, 0.2, 0.2
-        faci_scalar = (w_C * complexity) + (w_E * e_density) + (w_F * fraud_density) + (w_R * risk_score) + (w_A * ambiguity)
+        weights = [0.15, 0.15, 0.15, 0.15, 0.10, 0.10, 0.10, 0.10]
+        faci_scalar = sum(w * v for w, v in zip(weights, faci_vector))
         
-        return {
+        result = {
             "scalar": faci_scalar,
             "vector": faci_vector,
             "complexity": complexity,
@@ -67,3 +74,20 @@ class FACICalculator:
             "rare_word_density": rare_word_density,
             "redaction_density": redaction_density
         }
+        
+        self.history.append(result)
+        return result
+        
+    def save_scores(self):
+        if not self.history:
+            return
+            
+        csv_path = os.path.join(self.results_dir, "faci_scores.csv")
+        keys = ["scalar", "complexity", "entity_density", "fraud_density", "risk_score", "ambiguity", "semantic_entropy", "rare_word_density", "redaction_density"]
+        
+        with open(csv_path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=keys)
+            writer.writeheader()
+            for row in self.history:
+                filtered_row = {k: row[k] for k in keys}
+                writer.writerow(filtered_row)

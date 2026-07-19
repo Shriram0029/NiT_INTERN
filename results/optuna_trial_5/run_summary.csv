@@ -1,0 +1,2 @@
+run_id,seed,accuracy,precision,recall,macro_f1,weighted_f1,training_loss,training_time,inference_time,total_time_s,best_ga_fitness,best_gwo_fitness,best_macro_f1,chunks_per_baseline
+5,42,0.3564356435643564,0.469047619047619,0.4582671689365402,0.3373311086028365,0.3138128845519385,0.10000000000000002,8.535625457763672,0.053347659111022946,10.67,0.0,0.0,0.4646,20

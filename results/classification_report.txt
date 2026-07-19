@@ -1,0 +1,11 @@
+Classification Report — Hybrid GA + GWO
+=============================================
+Accuracy   : 0.4000
+Macro F1   : 0.1429
+Weighted F1: 0.2286
+
+  Unauthorized Transaction        P=0.4000  R=1.0000  F1=0.5714
+  Identity Theft                  P=0.0000  R=0.0000  F1=0.0000
+  Card Fraud                      P=0.0000  R=0.0000  F1=0.0000
+  Account Takeover                P=0.0000  R=0.0000  F1=0.0000
+  Phishing / Scam                 P=0.0000  R=0.0000  F1=0.0000
