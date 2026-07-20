@@ -12,7 +12,7 @@ class Augmentor:
         self.en_de = None
         self.de_en = None
         self.fill_mask = None
-        self.validator = None
+        self.validator = SemanticValidator()
 
     def back_translate(self, text):
         return text + " [BT]"
@@ -20,7 +20,7 @@ class Augmentor:
     def bert_masking(self, text, mask_prob):
         return text + " [BM]"
 
-    def generate(self, text, label, chunk_id, prediction):
+    def generate(self, text, label, chunk_id, prediction, dynamic_threshold=None):
         strategy = prediction.get("strategy", "No Augmentation")
         budget = prediction.get("budget", 0)
         
@@ -51,8 +51,18 @@ class Augmentor:
                     else:
                         aug = self.bert_masking(text, mask_prob)
                         
-                is_valid = True  # Bypass SemanticValidator to avoid more PyTorch models
-                reason = "Valid"
+                # Semantic Validation
+                is_valid, reason = self.validator.validate_and_log(
+                    chunk_id=chunk_id,
+                    original_text=text,
+                    augmented_text=aug,
+                    original_label=label,
+                    augmented_label=label,
+                    entities=entities,
+                    existing_samples=list(results),
+                    method=strategy,
+                    dynamic_threshold=dynamic_threshold
+                )
                 
                 if aug == text:
                     continue

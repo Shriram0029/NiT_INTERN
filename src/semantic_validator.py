@@ -15,17 +15,19 @@ class SemanticValidator:
         if not os.path.exists(self.report_path):
             with open(self.report_path, "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
-                writer.writerow(["Timestamp", "Chunk_ID", "Original_Text", "Augmented_Text", "Similarity", "Method", "Status", "Reason"])
+                writer.writerow(["Timestamp", "Chunk_ID", "Original_Text", "Augmented_Text", "Similarity", "Threshold", "Method", "Status", "Reason"])
         
-    def validate_and_log(self, chunk_id, original_text, augmented_text, original_label, augmented_label, entities, existing_samples=None, method="Unknown"):
-        is_valid, reason, similarity = self._validate(original_text, augmented_text, original_label, augmented_label, entities, existing_samples)
+    def validate_and_log(self, chunk_id, original_text, augmented_text, original_label, augmented_label, entities, existing_samples=None, method="Unknown", dynamic_threshold=None):
+        threshold_to_use = dynamic_threshold if dynamic_threshold is not None else self.semantic_threshold
+        is_valid, reason, similarity = self._validate(original_text, augmented_text, original_label, augmented_label, entities, existing_samples, threshold_to_use)
         
         timestamp = datetime.datetime.now().isoformat()
         with open(self.report_path, "a", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerow([
                 timestamp, chunk_id, original_text, augmented_text, 
-                f"{similarity:.4f}" if similarity is not None else "N/A", 
+                f"{similarity:.4f}" if similarity is not None else "N/A",
+                f"{threshold_to_use:.2f}",
                 method, 
                 "Accepted" if is_valid else "Rejected", 
                 reason
@@ -33,7 +35,7 @@ class SemanticValidator:
             
         return is_valid, reason
 
-    def _validate(self, original_text, augmented_text, original_label, augmented_label, entities, existing_samples=None):
+    def _validate(self, original_text, augmented_text, original_label, augmented_label, entities, existing_samples=None, threshold=0.8):
         if not augmented_text or not augmented_text.strip():
             return False, "Empty generation", 0.0
             
@@ -57,8 +59,6 @@ class SemanticValidator:
             return False, "XXXX replaced", None
             
         for bank_ent in self.banking_entities:
-            # simple whole word boundary check
-            # avoiding regex overhead, using basic split
             orig_words = set(orig_lower.split())
             aug_words = set(aug_lower.split())
             if bank_ent in aug_words and bank_ent not in orig_words:
@@ -73,8 +73,8 @@ class SemanticValidator:
         overlap = len(orig_tokens.intersection(aug_tokens))
         similarity = overlap / len(orig_tokens)
         
-        if similarity < self.semantic_threshold:
-            return False, f"Semantic similarity below threshold ({similarity:.2f} < {self.semantic_threshold})", similarity
+        if similarity < threshold:
+            return False, f"Semantic similarity below threshold ({similarity:.2f} < {threshold})", similarity
             
         if similarity > self.semantic_upper_bound:
             return False, f"Semantic similarity too high ({similarity:.2f} > {self.semantic_upper_bound})", similarity

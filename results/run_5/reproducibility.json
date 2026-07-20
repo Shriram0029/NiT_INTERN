@@ -1,23 +1,18 @@
 {
     "Random Seed": 101112,
-    "Configuration": "Hybrid GA+GWO Framework",
+    "Configuration": "Hybrid GA+GWO Framework (Tuned)",
     "Hyperparameters": {
-        "GA_Population": 10,
-        "GA_Generations": 5,
-        "GWO_Wolves": 5,
-        "GWO_Iterations": 5,
-        "Replay_Buffer": 1000
+        "learning_rate": 2e-05,
+        "batch_size": 16,
+        "epochs": 2,
+        "aug_budget_max": 7,
+        "semantic_threshold": 0.8140716957198209
     },
-    "Execution Timestamp": "2026-07-19T17:11:16.128168",
+    "Execution Timestamp": "2026-07-19T19:28:24.651249",
     "Software Versions": {
-        "Python": "3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:20:11) [MSC v.1938 64 bit (AMD64)]",
-        "Torch": "2.11.0+cu128",
-        "Numpy": "1.26.4",
-        "Pandas": "3.0.2"
-    },
-    "System Information": {
-        "OS": "Windows",
-        "Release": "10",
-        "Machine": "AMD64"
+        "Python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+        "Torch": "2.11.0+cu126",
+        "Numpy": "2.2.6",
+        "Pandas": "2.3.3"
     }
 }

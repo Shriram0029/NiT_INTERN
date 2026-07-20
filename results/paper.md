@@ -14,7 +14,7 @@ Augmented samples are validated semantically before entering a balanced Replay
 Buffer, and a fine-tuned RoBERTa classifier is trained incrementally on each
 incoming data chunk.
 Across five independent runs, our method achieves a Macro F1 of
-**0.3759 ± 0.0304**, outperforming all static baselines by a
+**0.5851 ± 0.0844**, outperforming all static baselines by a
 significant margin (p < 0.05 paired Wilcoxon test).
 
 ---

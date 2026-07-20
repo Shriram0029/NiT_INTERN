@@ -75,6 +75,23 @@ class Visualizer:
         ax.legend()
         self._save(filename)
 
+    def plot_learning_rate(
+        self,
+        lr_history: List[float],
+        filename: str = "learning_rate_curve.png",
+    ) -> None:
+        if not lr_history:
+            return
+        fig, ax = plt.subplots()
+        ax.plot(range(1, len(lr_history) + 1), lr_history,
+                color=PALETTE[0], label="Learning Rate")
+        ax.set_title("Learning Rate Schedule")
+        ax.set_xlabel("Training Step")
+        ax.set_ylabel("Learning Rate")
+        ax.ticklabel_format(axis='y', style='sci', scilimits=(0,0))
+        ax.legend()
+        self._save(filename)
+
     def plot_validation_loss(
         self,
         val_loss: List[float],

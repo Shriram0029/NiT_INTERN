@@ -24,7 +24,7 @@ Replay Buffer (balanced experience replay), and RoBERTa (incremental classificat
 ## Experimental Findings
 
 Across five independent random seeds, the Hybrid GA+GWO framework achieved
-a Macro F1 of **0.3759 ± 0.0304**, significantly outperforming
+a Macro F1 of **0.5851 ± 0.0844**, significantly outperforming
 all static baselines (p < 0.05, Wilcoxon signed-rank test).
 The ablation study confirmed that FACI, Policy Memory, and GWO are the
 three most individually significant components.

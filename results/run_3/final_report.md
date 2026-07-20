@@ -1,6 +1,6 @@
 # Final Experimental Report — Nature-Inspired Augmentation Selection
 
-**Generated**: 2026-07-19 11:40 UTC
+**Generated**: 2026-07-19 13:55 UTC
 
 ---
 
@@ -8,27 +8,27 @@
 
 | Property | Value |
 |---|---|
-| Total Samples | 501 |
-| Classes | Credit reporting, credit repair services, or other personal consumer reports, Credit reporting or other personal consumer reports, Debt collection, Credit card or prepaid card, Mortgage |
-| Training Set | 400 |
-| Validation Set | 44 |
-| Test Set | 101 |
+| Total Samples | 915 |
+| Classes | Credit reporting or other personal consumer reports, Credit reporting, credit repair services, or other personal consumer reports, Debt collection, Credit card or prepaid card, Mortgage |
+| Training Set | 732 |
+| Validation Set | 80 |
+| Test Set | 183 |
 
 ## 2. Label Distribution
 
 | Class | Count |
 |---|---|
-| Credit reporting, credit repair services, or other personal consumer reports | 165 |
-| Credit reporting or other personal consumer reports | 114 |
-| Debt collection | 60 |
-| Credit card or prepaid card | 33 |
-| Mortgage | 28 |
+| Credit reporting or other personal consumer reports | 292 |
+| Credit reporting, credit repair services, or other personal consumer reports | 249 |
+| Debt collection | 107 |
+| Credit card or prepaid card | 47 |
+| Mortgage | 37 |
 
 ## 3. FACI Statistics
 
 | Statistic | Value |
 |---|---|
-| Average FACI Scalar | 0.2030 |
+| Average FACI Scalar | 0.2049 |
 | Average Complexity | 0.5000 |
 | Average Semantic Entropy | 0.8000 |
 
@@ -36,22 +36,22 @@
 
 | Statistic | Value |
 |---|---|
-| Total Policies Generated | 40 |
+| Total Policies Generated | 25 |
 
 ### Strategy Breakdown
 
 | Strategy | Count |
 |---|---|
-| Hybrid | 40 |
+| Hybrid | 25 |
 
 ## 5. Optimizer Summary
 
 | Metric | Value |
 |---|---|
-| Average Expected Utility | 0.8256 |
+| Average Expected Utility | 0.8216 |
 | Final Fitness Score | 0.8290 |
-| Average Runtime (s/chunk) | 0.19 |
-| Average Peak Memory (MB) | 1.1 |
+| Average Runtime (s/chunk) | 5.29 |
+| Average Peak Memory (MB) | 0.9 |
 
 ## 6. Training Curves & Visualizations
 
@@ -71,32 +71,32 @@ See `visualizations/` for:
 | Metric | Value |
 |---|---|
 | Loss | 0.0000 |
-| Accuracy | 0.3762 |
-| Macro Precision | 0.3670 |
-| Macro Recall | 0.4727 |
-| **Macro F1** | **0.3506** |
-| Weighted F1 | 0.3347 |
-| ROC AUC | 0.7896 |
+| Accuracy | 0.6667 |
+| Macro Precision | 0.6473 |
+| Macro Recall | 0.7043 |
+| **Macro F1** | **0.6648** |
+| Weighted F1 | 0.6622 |
+| ROC AUC | 0.8821 |
 
 ## 8. Per-Class Performance
 
 | Class | Precision | Recall | F1 |
 |---|---|---|---|
-| Credit reporting, credit repair services, or other personal consumer reports | 0.3333 | 0.1176 | 0.1739 |
-| Credit reporting or other personal consumer reports | 0.4750 | 0.6552 | 0.5507 |
-| Debt collection | 0.5000 | 0.1905 | 0.2759 |
-| Credit card or prepaid card | 0.2222 | 0.4000 | 0.2857 |
-| Mortgage | 0.3043 | 1.0000 | 0.4667 |
+| Credit reporting or other personal consumer reports | 0.7326 | 0.7778 | 0.7545 |
+| Credit reporting, credit repair services, or other personal consumer reports | 0.5625 | 0.4909 | 0.5243 |
+| Debt collection | 0.7083 | 0.5862 | 0.6415 |
+| Credit card or prepaid card | 0.5333 | 0.8889 | 0.6667 |
+| Mortgage | 0.7000 | 0.7778 | 0.7368 |
 
 ## 9. Confusion Matrix
 
-| True \ Pred | Credit reporting, credit repair services, or other personal consumer reports | Credit reporting or other personal consumer reports | Debt collection | Credit card or prepaid card | Mortgage |
+| True \ Pred | Credit reporting or other personal consumer reports | Credit reporting, credit repair services, or other personal consumer reports | Debt collection | Credit card or prepaid card | Mortgage |
 |---|---|---|---|---|---|
-| Credit reporting, credit repair services, or other personal consumer reports | 4 | 15 | 3 | 7 | 5 |
-| Credit reporting or other personal consumer reports | 3 | 19 | 1 | 5 | 1 |
-| Debt collection | 4 | 6 | 4 | 2 | 5 |
-| Credit card or prepaid card | 1 | 0 | 0 | 4 | 5 |
-| Mortgage | 0 | 0 | 0 | 0 | 7 |
+| Credit reporting or other personal consumer reports | 63 | 14 | 2 | 2 | 0 |
+| Credit reporting, credit repair services, or other personal consumer reports | 20 | 27 | 3 | 3 | 2 |
+| Debt collection | 3 | 6 | 17 | 2 | 1 |
+| Credit card or prepaid card | 0 | 0 | 1 | 8 | 0 |
+| Mortgage | 0 | 1 | 1 | 0 | 7 |
 
 ## 10. Discussion
 

@@ -30,3 +30,9 @@ Thumbs.db
 # Temporary Files
 *.tmp
 *.temp
+
+
+*.pt
+*.pth
+*.ckpt*.pt
+*.pth

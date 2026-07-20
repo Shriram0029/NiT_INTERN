@@ -1,6 +1,6 @@
 # Final Experimental Report — Nature-Inspired Augmentation Selection
 
-**Generated**: 2026-07-19 12:19 UTC
+**Generated**: 2026-07-19 13:48 UTC
 
 ---
 
@@ -8,27 +8,27 @@
 
 | Property | Value |
 |---|---|
-| Total Samples | 501 |
-| Classes | Credit reporting, credit repair services, or other personal consumer reports, Credit reporting or other personal consumer reports, Debt collection, Credit card or prepaid card, Mortgage |
-| Training Set | 400 |
-| Validation Set | 44 |
-| Test Set | 101 |
+| Total Samples | 915 |
+| Classes | Credit reporting or other personal consumer reports, Credit reporting, credit repair services, or other personal consumer reports, Debt collection, Credit card or prepaid card, Mortgage |
+| Training Set | 732 |
+| Validation Set | 80 |
+| Test Set | 183 |
 
 ## 2. Label Distribution
 
 | Class | Count |
 |---|---|
-| Credit reporting, credit repair services, or other personal consumer reports | 165 |
-| Credit reporting or other personal consumer reports | 114 |
-| Debt collection | 60 |
-| Credit card or prepaid card | 33 |
-| Mortgage | 28 |
+| Credit reporting or other personal consumer reports | 292 |
+| Credit reporting, credit repair services, or other personal consumer reports | 249 |
+| Debt collection | 107 |
+| Credit card or prepaid card | 47 |
+| Mortgage | 37 |
 
 ## 3. FACI Statistics
 
 | Statistic | Value |
 |---|---|
-| Average FACI Scalar | 0.2030 |
+| Average FACI Scalar | 0.2042 |
 | Average Complexity | 0.5000 |
 | Average Semantic Entropy | 0.8000 |
 
@@ -48,10 +48,10 @@
 
 | Metric | Value |
 |---|---|
-| Average Expected Utility | 0.8259 |
-| Final Fitness Score | 0.8348 |
-| Average Runtime (s/chunk) | 0.37 |
-| Average Peak Memory (MB) | 1.5 |
+| Average Expected Utility | 0.8323 |
+| Final Fitness Score | 0.8323 |
+| Average Runtime (s/chunk) | 7.56 |
+| Average Peak Memory (MB) | 63.6 |
 
 ## 6. Training Curves & Visualizations
 
@@ -71,32 +71,32 @@ See `visualizations/` for:
 | Metric | Value |
 |---|---|
 | Loss | 0.0000 |
-| Accuracy | 0.4455 |
-| Macro Precision | 0.4966 |
-| Macro Recall | 0.5342 |
-| **Macro F1** | **0.4418** |
-| Weighted F1 | 0.4349 |
-| ROC AUC | 0.8401 |
+| Accuracy | 0.5847 |
+| Macro Precision | 0.5429 |
+| Macro Recall | 0.5930 |
+| **Macro F1** | **0.5288** |
+| Weighted F1 | 0.5630 |
+| ROC AUC | 0.8495 |
 
 ## 8. Per-Class Performance
 
 | Class | Precision | Recall | F1 |
 |---|---|---|---|
-| Credit reporting, credit repair services, or other personal consumer reports | 0.5000 | 0.2647 | 0.3462 |
-| Credit reporting or other personal consumer reports | 0.4737 | 0.6207 | 0.5373 |
-| Debt collection | 0.7500 | 0.2857 | 0.4138 |
-| Credit card or prepaid card | 0.5000 | 0.5000 | 0.5000 |
-| Mortgage | 0.2593 | 1.0000 | 0.4118 |
+| Credit reporting or other personal consumer reports | 0.6633 | 0.8025 | 0.7263 |
+| Credit reporting, credit repair services, or other personal consumer reports | 0.5366 | 0.4000 | 0.4583 |
+| Debt collection | 0.5000 | 0.2069 | 0.2927 |
+| Credit card or prepaid card | 0.3478 | 0.8889 | 0.5000 |
+| Mortgage | 0.6667 | 0.6667 | 0.6667 |
 
 ## 9. Confusion Matrix
 
-| True \ Pred | Credit reporting, credit repair services, or other personal consumer reports | Credit reporting or other personal consumer reports | Debt collection | Credit card or prepaid card | Mortgage |
+| True \ Pred | Credit reporting or other personal consumer reports | Credit reporting, credit repair services, or other personal consumer reports | Debt collection | Credit card or prepaid card | Mortgage |
 |---|---|---|---|---|---|
-| Credit reporting, credit repair services, or other personal consumer reports | 9 | 14 | 1 | 3 | 7 |
-| Credit reporting or other personal consumer reports | 6 | 18 | 1 | 1 | 3 |
-| Debt collection | 2 | 6 | 6 | 1 | 6 |
-| Credit card or prepaid card | 1 | 0 | 0 | 5 | 4 |
-| Mortgage | 0 | 0 | 0 | 0 | 7 |
+| Credit reporting or other personal consumer reports | 65 | 12 | 2 | 2 | 0 |
+| Credit reporting, credit repair services, or other personal consumer reports | 25 | 22 | 2 | 4 | 2 |
+| Debt collection | 8 | 7 | 6 | 7 | 1 |
+| Credit card or prepaid card | 0 | 0 | 1 | 8 | 0 |
+| Mortgage | 0 | 0 | 1 | 2 | 6 |
 
 ## 10. Discussion
 

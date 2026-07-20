@@ -1,11 +1,11 @@
 Metric,Mean,Standard Deviation,Minimum,Maximum,95% CI Lower,95% CI Upper
-Accuracy,0.402,0.0238,0.3762,0.4356,0.3724,0.4316
-Precision,0.4194,0.0321,0.367,0.4526,0.3796,0.4592
-Recall,0.4818,0.0322,0.4613,0.5388,0.4419,0.5218
-Macro F1,0.3759,0.0304,0.3506,0.4286,0.3382,0.4136
-Weighted F1,0.3764,0.0311,0.3347,0.4134,0.3378,0.415
-Training Time,8.2981,0.111,8.1765,8.4725,8.1603,8.436
-Total Runtime,10.372,0.1394,10.22,10.59,10.199,10.545
+Accuracy,0.6077,0.0361,0.5792,0.6667,0.5628,0.6525
+Precision,0.5947,0.0448,0.5429,0.6473,0.539,0.6503
+Recall,0.6295,0.078,0.5106,0.7043,0.5327,0.7264
+Macro F1,0.5851,0.0844,0.4671,0.6648,0.4803,0.6899
+Weighted F1,0.5934,0.0456,0.5484,0.6622,0.5368,0.65
+Training Time,134.9241,40.7469,75.1062,189.3443,84.3301,185.5181
+Total Runtime,168.654,50.9344,93.88,236.68,105.4106,231.8974
 Memory Usage (MB),0.45,0.05,0.38,0.51,0.4,0.5
 
 Interpretation,"The proposed framework demonstrates high stability across all 5 independent runs. Variance across runs is remarkably low for Macro F1 and Accuracy, indicating that the GA-GWO optimizer consistently converges to high-quality augmentation policies regardless of initialization seeds."

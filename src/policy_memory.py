@@ -22,17 +22,16 @@ class PolicyMemory:
                 writer = csv.writer(f)
                 writer.writerow([
                     "Timestamp", "Chunk_ID", "Strategy", "Budget", "Fitness", "Macro_F1", 
-                    "Utility", "Confidence", "Cost", "FACI_Vector"
+                    "Utility", "Confidence", "Cost", "FACI_Vector", "Semantic_Threshold"
                 ])
                 
-    def add_state(self, chunk_id, faci_vector, strategy, fitness, macro_f1, utility, confidence, cost, budget=0, alpha=None, beta=None, delta=None, elite_pop=None):
+    def add_state(self, chunk_id, faci_vector, strategy, fitness, macro_f1, utility, confidence, cost, budget=0, alpha=None, beta=None, delta=None, elite_pop=None, semantic_threshold=None):
         timestamp = datetime.datetime.now().isoformat()
         
         # Deduplication check
         if alpha is not None:
             alpha_tuple = tuple(np.round(alpha, 4))
             if alpha_tuple in self.seen_alphas:
-                # If we've seen this exact policy, we might not want to add it to elites again
                 pass 
             else:
                 self.seen_alphas.add(alpha_tuple)
@@ -51,7 +50,8 @@ class PolicyMemory:
             "alpha": alpha,
             "beta": beta,
             "delta": delta,
-            "elite_pop": elite_pop or []
+            "elite_pop": elite_pop or [],
+            "semantic_threshold": semantic_threshold
         }
         
         self.memory.append(entry)
@@ -84,7 +84,7 @@ class PolicyMemory:
             writer = csv.writer(f)
             writer.writerow([
                 timestamp, chunk_id, strategy, budget, fitness, macro_f1, 
-                utility, confidence, cost, str(faci_vector)
+                utility, confidence, cost, str(faci_vector), semantic_threshold
             ])
             
     def get_last_alpha_beta_delta(self):

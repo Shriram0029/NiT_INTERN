@@ -1,6 +1,6 @@
 class,precision,recall,f1_score
-"Credit reporting, credit repair services, or other personal consumer reports",0.5,0.4117647058823529,0.45161290322580644
-Credit reporting or other personal consumer reports,0.5,0.5517241379310345,0.5245901639344263
-Debt collection,0.6,0.14285714285714285,0.23076923076923078
-Credit card or prepaid card,0.2222222222222222,0.2,0.21052631578947367
-Mortgage,0.25925925925925924,1.0,0.4117647058823529
+Credit reporting or other personal consumer reports,0.7083333333333334,0.6296296296296297,0.6666666666666666
+"Credit reporting, credit repair services, or other personal consumer reports",0.4166666666666667,0.45454545454545453,0.43478260869565216
+Debt collection,0.56,0.4827586206896552,0.5185185185185185
+Credit card or prepaid card,0.5625,1.0,0.72
+Mortgage,0.7,0.7777777777777778,0.7368421052631579
