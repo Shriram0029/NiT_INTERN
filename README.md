@@ -2,7 +2,7 @@
 
 This repository implements the Augmentation Selection Framework for Cyber Banking Data, powered by a Hybrid Genetic Algorithm and Grey Wolf Optimization (GA-GWO) pipeline.
 
-## Environment Setup
+## Complete Environment Setup
 
 Ensure you have Python 3.9+ installed.
 
